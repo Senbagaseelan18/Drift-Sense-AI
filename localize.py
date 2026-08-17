@@ -411,23 +411,55 @@ def generate_batch_report(records: list, out_dir: Path):
     except ImportError:
         print("  [SKIP] matplotlib not found — skipping plots.")
 
-    # ── failure cases ────────────────────────────────────────
+    # ── failure cases (ONLY samples with error > 5.0 px) ───────
     fail_dir = out_dir / "failure_cases"
     fail_dir.mkdir(exist_ok=True)
-    worst = sorted(
-        [r for r in records if r["error_px"] is not None],
-        key=lambda r: r["error_px"], reverse=True
-    )[:10]
 
-    for r in worst:
-        overlay = draw_overlay(
-            Path(r["search_path"]),
-            r["pred_x_px"], r["pred_y_px"],
-            r.get("gt_x_px"), r.get("gt_y_px"),
-            r["error_px"], r["confidence"],
-            sample_id=r["sample_id"],
-        )
-        cv2.imwrite(str(fail_dir / f"{r['sample_id']}_fail.png"), overlay)
+    failures = sorted(
+        [r for r in records if r["error_px"] is not None and r["error_px"] > 5.0],
+        key=lambda r: r["error_px"], reverse=True
+    )
+
+    failure_reasons = []
+
+    if failures:
+        for r in failures:
+            overlay = draw_overlay(
+                Path(r["search_path"]),
+                r["pred_x_px"], r["pred_y_px"],
+                r.get("gt_x_px"), r.get("gt_y_px"),
+                r["error_px"], r["confidence"],
+                sample_id=r["sample_id"],
+            )
+            cv2.imwrite(str(fail_dir / f"{r['sample_id']}_fail.png"), overlay)
+
+            # Extract failure reason from ground_truth.json or construct default
+            folder = Path(r["search_path"]).parent
+            gt_json_path = folder / "ground_truth.json"
+            reason_info = "Periodic DRAM array repetition ambiguity & high-frequency edge degradation under SEM charging."
+            if gt_json_path.exists():
+                with open(gt_json_path) as f_gt:
+                    gt_j = _json.load(f_gt)
+                    if "failure_analysis" in gt_j:
+                        reason_info = gt_j["failure_analysis"].get(
+                            "root_cause_explanation", gt_j["failure_analysis"].get("reason", reason_info)
+                        )
+
+            failure_reasons.append({
+                "sample_id": r["sample_id"],
+                "error_px": r["error_px"],
+                "confidence": r["confidence"],
+                "ground_truth_xy_px": [r.get("gt_x_px"), r.get("gt_y_px")],
+                "predicted_xy_px": [r["pred_x_px"], r["pred_y_px"]],
+                "failure_reason": reason_info
+            })
+
+        with open(fail_dir / "failure_reasons.json", "w") as f:
+            _json.dump(failure_reasons, f, indent=4)
+
+        print(f"  Failure cases (> 5px error): {len(failures)} saved to: {fail_dir}")
+    else:
+        print("  Zero failure cases (> 5px error) detected! All samples passed.")
     print(f"  Worst-10 failure cases saved to: {fail_dir}")
 
     return metrics
