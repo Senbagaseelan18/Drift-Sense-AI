@@ -1,0 +1,17 @@
+{
+  "model_architecture": "Siamese ResNet50 + Correlation Head",
+  "dataset_root": "dataset",
+  "image_size": 224,
+  "feat_channels": 256,
+  "epochs": 30,
+  "batch_size": 64,
+  "micro_batch": 16,
+  "learning_rate": 0.0005,
+  "weight_decay": 0.0001,
+  "loss_weights": {
+    "alpha_wing": 0.50,
+    "beta_gaussian_heatmap": 0.45,
+    "gamma_confidence": 0.05
+  },
+  "best_checkpoint": "model/resnet50_checkpoints/best_model.pth"
+}
