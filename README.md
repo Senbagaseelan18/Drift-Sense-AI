@@ -128,7 +128,7 @@ python train_model.py
 <br/>
 
 <div align="center">
-  <img src="images/train.png" alt="Training Progress & Loss Curves" width="80%"/>
+  <img src="images/train.png" alt="Training Progress" width="80%"/>
   <p><i>Figure 3: Training Loss & Validation Accuracy Curves across 50 Epochs</i></p>
 </div>
 
@@ -157,7 +157,7 @@ python localize.py
 <br/>
 
 <div align="center">
-  <img src="images/output_overlay_success.png" alt="Localization Overlay Result (Success Case)" width="80%"/>
+  <img src="images/success.png" alt="Localization Overlay Result (Success Case)" width="80%"/>
   <p><i>Figure 4: Output Overlay — Success Case (Green = Ground Truth, Cyan = Prediction)</i></p>
 </div>
 
