@@ -110,7 +110,7 @@ python generate_dataset.py
 <br/>
 
 <div align="center">
-  <img src="images/dataset_generation_preview.png" alt="Dataset Generation Preview" width="80%"/>
+  <img src="images/train.png" alt="Dataset Generation Preview" width="80%"/>
   <p><i>Figure 2: Synthetic SEM Image Pair Generation (100x Reference Crop & 10x Search Field)</i></p>
 </div>
 
