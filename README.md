@@ -110,7 +110,7 @@ python generate_dataset.py
 <br/>
 
 <div align="center">
-  <img src="images/train.png" alt="Dataset Generation Preview" width="80%"/>
+  <img src="images/generate.png" alt="Dataset Generation Preview" width="80%"/>
   <p><i>Figure 2: Synthetic SEM Image Pair Generation (100x Reference Crop & 10x Search Field)</i></p>
 </div>
 
@@ -128,7 +128,7 @@ python train_model.py
 <br/>
 
 <div align="center">
-  <img src="images/training_loss_curve.png" alt="Training Progress & Loss Curves" width="80%"/>
+  <img src="images/train.png" alt="Training Progress & Loss Curves" width="80%"/>
   <p><i>Figure 3: Training Loss & Validation Accuracy Curves across 50 Epochs</i></p>
 </div>
 
