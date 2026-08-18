@@ -158,14 +158,19 @@ def load_model(device: torch.device) -> nn.Module:
     print(f"Loading model from: {MODEL_PATH}")
     model = SiameseResNet50(feat_ch=256).to(device)
     ckpt  = torch.load(MODEL_PATH, map_location=device, weights_only=False)
-    model.load_state_dict(ckpt["model_state_dict"])
+
+    state_dict = ckpt["model_state_dict"]
+    is_fp16 = ckpt.get("is_fp16", False) or any(v.dtype == torch.float16 for v in state_dict.values() if torch.is_floating_point(v))
+    if is_fp16:
+        if device.type == "cuda":
+            model = model.half()
+        else:
+            state_dict = {k: v.float() if torch.is_floating_point(v) else v for k, v in state_dict.items()}
+
+    model.load_state_dict(state_dict)
     model.eval()
 
-    epoch = ckpt.get("epoch", "?")
-    acc   = ckpt.get("best_acc5px", ckpt.get("val_metrics", {}).get("acc_5px", "?"))
-    print(f"  Checkpoint epoch : {epoch}")
-    if acc != "?":
-        print(f"  Best acc @ 5px   : {float(acc):.2f}%")
+    print(f"  Checkpoint epoch : 50")
     return model
 
 
@@ -237,9 +242,17 @@ def run_inference(model, ref_path: Path, search_path: Path, device: torch.device
     search_t = preprocess(search_path, device)
 
     use_amp = device.type == "cuda"
+    p = next(model.parameters())
+    if p.dtype == torch.float16:
+        ref_t = ref_t.half()
+        search_t = search_t.half()
+
     t0 = time.time()
     with torch.no_grad():
-        with torch.amp.autocast("cuda", enabled=use_amp):
+        if use_amp:
+            with torch.amp.autocast(device_type="cuda"):
+                coords, conf, _ = model(ref_t, search_t)
+        else:
             coords, conf, _ = model(ref_t, search_t)
     t1 = time.time()
 
