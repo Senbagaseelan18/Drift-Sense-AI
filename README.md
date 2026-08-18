@@ -76,24 +76,21 @@ flowchart TD
 ```bash
 git clone https://github.com/Senbagaseelan18/Drift-Sense-AI.git
 cd Drift-Sense-AI
-
 python -m venv .venv
-# On Windows PowerShell:
-.venv\Scripts\Activate.ps1
+# On Windows (Use CMD - Command Prompt):
+.venv\Scripts\activate.bat
 # On Linux / macOS:
 source .venv/bin/activate
 ```
-
+> **Important Note for Windows Users:** Please use **Command Prompt (CMD)** to run `.venv\Scripts\activate.bat` cleanly without PowerShell security policy errors.
 ### 2. Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
-
 > **Note for GPU Acceleration (CUDA 12.1):**
 > ```bash
 > pip install torch==2.5.1+cu121 torchvision==0.20.1+cu121 --index-url https://download.pytorch.org/whl/cu121
 > ```
-
 ---
 
 ## ⚡ Execution Commands & Visual Workflows
