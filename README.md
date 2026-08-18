@@ -24,6 +24,10 @@ During semiconductor wafer inspection, high-precision tools must repeatedly navi
 
 ---
 
+> **📁 Pre-Generated Base Dataset Download:**  
+> You can also download the pre-generated 76 base DRAM image pairs directly from Google Drive:  
+> 🔗 **[Download Base DRAM Pairs (Google Drive)](https://drive.google.com/drive/folders/14tffuYXesTCyoTcfriuN1-BXRo77JAjM?usp=sharing)**
+
 ## 🏗 System Architecture & Pipeline
 
 Our approach combines physical DRAM scene synthesis, a multi-scale **Siamese ResNet50 + Feature Pyramid Network (FPN)** encoder, cosine cross-correlation, and a sub-pixel **Soft-Argmax2D** regression layer.
