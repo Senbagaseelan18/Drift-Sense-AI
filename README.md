@@ -242,21 +242,16 @@ Drift-Sense-AI/
 │   └── ...
 ├── configs/                        # Configuration files
 │   └── resnet50_config.json
-├── images/                         # Documentation visual previews & evaluation plots
-│   ├── output_overlay_success.png  # Success case bounding box overlay
-│   ├── output_overlay_failure.png  # Failure case visual overlay
-│   ├── plot_error_histogram.png    # Pixel error histogram plot
-│   ├── plot_accuracy_cdf.png       # Cumulative accuracy CDF curve
-│   ├── plot_pred_vs_gt_scatter.png # Predicted vs GT scatter plot
-│   └── plot_confidence_vs_error.png# Confidence vs error scatter plot
+├── results/                        # Evaluation outputs & batch inference logs
+│   ├── localize_results.csv
+│   └── ...
 ├── model/                          # Saved model weights
-│   └── best_model.pth              # Trained checkpoint (~297 MB)
+│   └── best_model.pth              # Trained checkpoint (~95 MB)
 ├── .gitignore                      # Workspace ignore rules
 ├── generate_dataset.py             # Master dataset generator & augmentation pipeline
 ├── train_model.py                  # Self-contained training script (50 epochs, batch 16)
 ├── localize.py                     # Standalone evaluation inference script
 ├── requirements.txt                # Dependencies list
-├── SEM_Pattern_Matching_Report.txt # Detailed project report
 └── README.md                       # Documentation
 ```
 
