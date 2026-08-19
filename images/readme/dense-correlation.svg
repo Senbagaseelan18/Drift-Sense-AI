@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400">
+  <defs>
+    <style>
+      .bg { fill: #0d1117; }
+      .grid-line { stroke: #21262d; stroke-width: 1; }
+      .text-label { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; font-weight: bold; fill: #c9d1d9; }
+      .text-sub { font-family: 'Courier New', monospace; font-size: 12px; fill: #8b949e; }
+      
+      .ref-kernel {
+        fill: rgba(88, 166, 255, 0.3);
+        stroke: #58a6ff;
+        stroke-width: 2;
+        animation: scan 4s infinite linear;
+      }
+      
+      .heatmap-cell {
+        stroke: #161b22;
+        stroke-width: 1;
+        animation: heatPulse 4s infinite linear;
+      }
+      
+      @keyframes scan {
+        0%, 10% { transform: translate(0, 0); }
+        80%, 100% { transform: translate(140px, 140px); }
+      }
+      
+      @keyframes heatPulse {
+        0%, 10% { fill: #161b22; }
+        80%, 100% { fill: #161b22; }
+      }
+      
+      /* Target Peak Cell */
+      .peak-cell {
+        animation: peakPulse 4s infinite linear;
+      }
+      @keyframes peakPulse {
+        0%, 75% { fill: #161b22; }
+        80%, 90% { fill: #ff7b72; stroke: #ff7b72; }
+        100% { fill: #161b22; }
+      }
+
+      .math-text { font-family: 'Courier New', monospace; font-size: 20px; fill: #58a6ff; font-weight: bold; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect class="bg" width="900" height="400" />
+
+  <!-- Title -->
+  <text class="text-label" x="350" y="30" style="text-anchor: middle;">DENSE CROSS-CORRELATION</text>
+
+  <!-- Left: Search Feature Map Grid (28x28 visually represented as 8x8 for clarity) -->
+  <g transform="translate(100, 100)">
+    <text class="text-sub" x="0" y="-15">Search Feature Map</text>
+    <rect x="0" y="0" width="160" height="160" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+    <pattern id="grid8x8" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" class="grid-line" />
+    </pattern>
+    <rect x="0" y="0" width="160" height="160" fill="url(#grid8x8)" />
+    
+    <!-- Scanning Reference Kernel -->
+    <rect class="ref-kernel" x="0" y="0" width="20" height="20" />
+    
+    <!-- Reference Feature Note -->
+    <g transform="translate(-80, 0)">
+      <rect x="0" y="0" width="20" height="20" fill="rgba(88, 166, 255, 0.3)" stroke="#58a6ff" stroke-width="2"/>
+      <text class="text-sub" x="-10" y="-10">Ref Feature</text>
+      <path d="M 25 10 L 70 10" stroke="#58a6ff" stroke-width="2" stroke-dasharray="2 2" fill="none" />
+    </g>
+  </g>
+
+  <!-- Math operator -->
+  <text class="math-text" x="320" y="190">★</text>
+
+  <!-- Right: Correlation Heatmap (8x8) -->
+  <g transform="translate(450, 100)">
+    <text class="text-sub" x="0" y="-15">28x28 Localization Heatmap</text>
+    <rect x="0" y="0" width="160" height="160" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+    
+    <!-- Heatmap Cells -->
+    <g id="heatmap-grid">
+      <!-- Generated manually for animation effect: a peak at (140, 140) -->
+      <!-- We will just make the background mostly dark and highlight the peak -->
+      <rect x="0" y="0" width="160" height="160" fill="url(#grid8x8)" />
+      
+      <!-- Fake heatmap glowing radius -->
+      <rect class="peak-cell" x="140" y="140" width="20" height="20" />
+      
+      <!-- Connective lines mapping to soft-argmax -->
+      <path d="M 150 160 L 150 200 L 250 200" stroke="#ff7b72" stroke-width="2" stroke-dasharray="4 4" fill="none" />
+    </g>
+  </g>
+
+  <!-- Soft Argmax Node -->
+  <g transform="translate(710, 270)">
+    <rect x="0" y="0" width="120" height="60" fill="#161b22" stroke="#d2a8ff" stroke-width="2" rx="4"/>
+    <text class="text-label" x="60" y="25" style="fill: #d2a8ff; text-anchor: middle;">Soft-Argmax</text>
+    <text class="text-sub" x="60" y="45" style="text-anchor: middle;">(Differentiable)</text>
+    
+    <path d="M 60 -10 L 60 -50 L -60 -50" stroke="#ff7b72" stroke-width="2" stroke-dasharray="4 4" fill="none" />
+    
+    <!-- Output -->
+    <path d="M 120 30 L 150 30" stroke="#d2a8ff" stroke-width="2" fill="none" />
+    <text class="math-text" x="160" y="35" style="fill: #3fb950;">(x, y)</text>
+  </g>
+</svg>

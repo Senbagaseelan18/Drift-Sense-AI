@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300">
+  <defs>
+    <style>
+      .bg { fill: #0d1117; }
+      .card { fill: #161b22; stroke: #30363d; stroke-width: 1; rx: 8; }
+      .card-highlight { stroke: #58a6ff; fill: rgba(88, 166, 255, 0.05); }
+      .card-success { stroke: #3fb950; fill: rgba(63, 185, 80, 0.05); }
+      
+      .val-text { font-family: 'Courier New', monospace; font-size: 32px; font-weight: bold; text-anchor: middle; }
+      .lbl-text { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 12px; fill: #8b949e; text-anchor: middle; letter-spacing: 1px; text-transform: uppercase; }
+      
+      .val-blue { fill: #58a6ff; }
+      .val-green { fill: #3fb950; }
+      .val-purple { fill: #d2a8ff; }
+      .val-orange { fill: #ff7b72; }
+      .val-gray { fill: #c9d1d9; }
+      
+      .pulse-anim { animation: pulseBorder 4s infinite; }
+      @keyframes pulseBorder {
+        0%, 100% { stroke-width: 1; }
+        50% { stroke-width: 3; }
+      }
+    </style>
+  </defs>
+
+  <rect class="bg" width="800" height="300" />
+
+  <!-- Top Row -->
+  <!-- Accuracy 5px -->
+  <g transform="translate(50, 40)">
+    <rect class="card card-success pulse-anim" width="220" height="100" />
+    <text class="val-text val-green" x="110" y="55">96.67%</text>
+    <text class="lbl-text" x="110" y="80">ACCURACY @ ≤ 5 PX</text>
+  </g>
+  
+  <!-- Mean Error -->
+  <g transform="translate(290, 40)">
+    <rect class="card card-highlight pulse-anim" width="220" height="100" />
+    <text class="val-text val-blue" x="110" y="55">2.34 px</text>
+    <text class="lbl-text" x="110" y="80">MEAN ERROR</text>
+  </g>
+  
+  <!-- Latency -->
+  <g transform="translate(530, 40)">
+    <rect class="card" width="220" height="100" />
+    <text class="val-text val-purple" x="110" y="55">14.2 ms</text>
+    <text class="lbl-text" x="110" y="80">GPU LATENCY</text>
+  </g>
+
+  <!-- Bottom Row -->
+  <!-- Accuracy 10px -->
+  <g transform="translate(170, 160)">
+    <rect class="card" width="220" height="100" />
+    <text class="val-text val-gray" x="110" y="55">100.0%</text>
+    <text class="lbl-text" x="110" y="80">ACCURACY @ ≤ 10 PX</text>
+  </g>
+  
+  <!-- Parameters -->
+  <g transform="translate(410, 160)">
+    <rect class="card" width="220" height="100" />
+    <text class="val-text val-orange" x="110" y="55">24.91 M</text>
+    <text class="lbl-text" x="110" y="80">PARAMETERS</text>
+  </g>
+
+</svg>

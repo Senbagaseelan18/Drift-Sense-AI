@@ -1,0 +1,215 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <style>
+      .bg { fill: #0d1117; }
+      .grid { stroke: #21262d; stroke-width: 1; }
+      .dram { fill: #161b22; stroke: #30363d; stroke-width: 1; rx: 4; }
+      .dram-glow { fill: rgba(88, 166, 255, 0.1); }
+      .search-box { 
+        fill: none; 
+        stroke: rgba(88, 166, 255, 0.4); 
+        stroke-width: 2; 
+        stroke-dasharray: 4 4;
+        animation: searchSweep 6s infinite ease-in-out;
+      }
+      .target-box {
+        fill: rgba(88, 166, 255, 0.15);
+        stroke: #58a6ff;
+        stroke-width: 2;
+        opacity: 0;
+        animation: targetLock 6s infinite ease-in-out;
+      }
+      .crosshair {
+        stroke: #58a6ff;
+        stroke-width: 2;
+        opacity: 0;
+        animation: crosshairPulse 6s infinite ease-in-out;
+      }
+      .coord-text {
+        fill: #58a6ff;
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        font-weight: bold;
+        opacity: 0;
+        animation: textFade 6s infinite ease-in-out;
+      }
+      .status-text {
+        fill: #8b949e;
+        font-family: 'Segoe UI', system-ui, sans-serif;
+        font-size: 14px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        animation: statusChange 6s infinite ease-in-out;
+      }
+      .ref-panel { fill: #161b22; stroke: #30363d; stroke-width: 1; }
+      .ref-title { fill: #c9d1d9; font-family: 'Segoe UI', system-ui, sans-serif; font-size: 12px; font-weight: bold; letter-spacing: 1px;}
+      
+      @keyframes searchSweep {
+        0%, 15% { transform: translate(0px, 0px); opacity: 1; }
+        25% { transform: translate(300px, 50px); opacity: 1; }
+        35% { transform: translate(150px, 150px); opacity: 1; }
+        45% { transform: translate(400px, 100px); opacity: 1; }
+        55% { transform: translate(250px, 200px); opacity: 1; }
+        60% { transform: translate(250px, 200px); opacity: 0; }
+        100% { transform: translate(0px, 0px); opacity: 0; }
+      }
+      @keyframes targetLock {
+        0%, 55% { opacity: 0; transform: scale(1.5); transform-origin: 290px 240px; }
+        60% { opacity: 1; transform: scale(1); transform-origin: 290px 240px; }
+        90% { opacity: 1; transform: scale(1); transform-origin: 290px 240px; }
+        100% { opacity: 0; transform: scale(1.5); transform-origin: 290px 240px; }
+      }
+      @keyframes crosshairPulse {
+        0%, 60% { opacity: 0; }
+        65% { opacity: 1; stroke-width: 4; }
+        70% { opacity: 1; stroke-width: 2; }
+        90% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+      @keyframes textFade {
+        0%, 65% { opacity: 0; transform: translateY(10px); }
+        70% { opacity: 1; transform: translateY(0); }
+        90% { opacity: 1; transform: translateY(0); }
+        100% { opacity: 0; }
+      }
+      @keyframes statusChange {
+        0%, 15% { content: "NAV DRIFT DETECTED"; fill: #ff7b72; }
+        20%, 55% { content: "DENSE CORRELATION SEARCH"; fill: #d2a8ff; }
+        60%, 90% { content: "TARGET LOCKED"; fill: #3fb950; }
+        100% { content: "NAV DRIFT DETECTED"; fill: #ff7b72; }
+      }
+      @keyframes statusTextContent {
+        0%, 15% { opacity: 1; }
+        16%, 19% { opacity: 0; }
+        20%, 55% { opacity: 1; }
+        56%, 59% { opacity: 0; }
+        60%, 90% { opacity: 1; }
+        91%, 100% { opacity: 0; }
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect class="bg" width="800" height="400" />
+
+  <!-- Grid -->
+  <pattern id="gridPattern" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" class="grid" />
+  </pattern>
+  <rect width="800" height="400" fill="url(#gridPattern)" />
+
+  <!-- DRAM Array (Simplified Representation) -->
+  <g transform="translate(150, 40)">
+    <!-- Procedurally drawn DRAM-like structure with pure SVG -->
+    <path d="M0,0 h500 v320 h-500 z" fill="none" stroke="#21262d" stroke-width="2"/>
+    
+    <!-- Repeated DRAM cells -->
+    <!-- Row 1 -->
+    <rect class="dram" x="20" y="20" width="60" height="20" />
+    <rect class="dram" x="100" y="20" width="60" height="20" />
+    <rect class="dram" x="180" y="20" width="60" height="20" />
+    <rect class="dram" x="260" y="20" width="60" height="20" />
+    <rect class="dram" x="340" y="20" width="60" height="20" />
+    <rect class="dram" x="420" y="20" width="60" height="20" />
+    <!-- Row 2 -->
+    <rect class="dram" x="20" y="60" width="60" height="20" />
+    <rect class="dram" x="100" y="60" width="60" height="20" />
+    <rect class="dram" x="180" y="60" width="60" height="20" />
+    <rect class="dram" x="260" y="60" width="60" height="20" />
+    <rect class="dram" x="340" y="60" width="60" height="20" />
+    <rect class="dram" x="420" y="60" width="60" height="20" />
+    <!-- Row 3 -->
+    <rect class="dram" x="20" y="100" width="60" height="20" />
+    <rect class="dram" x="100" y="100" width="60" height="20" />
+    <rect class="dram" x="180" y="100" width="60" height="20" />
+    <rect class="dram" x="260" y="100" width="60" height="20" />
+    <rect class="dram" x="340" y="100" width="60" height="20" />
+    <rect class="dram" x="420" y="100" width="60" height="20" />
+    <!-- Row 4 -->
+    <rect class="dram" x="20" y="140" width="60" height="20" />
+    <rect class="dram" x="100" y="140" width="60" height="20" />
+    <rect class="dram" x="180" y="140" width="60" height="20" />
+    <rect class="dram" x="260" y="140" width="60" height="20" />
+    <rect class="dram" x="340" y="140" width="60" height="20" />
+    <rect class="dram" x="420" y="140" width="60" height="20" />
+    <!-- Row 5 -->
+    <rect class="dram" x="20" y="180" width="60" height="20" />
+    <rect class="dram" x="100" y="180" width="60" height="20" />
+    <rect class="dram dram-glow" x="180" y="180" width="60" height="20" />
+    <rect class="dram dram-glow" x="260" y="180" width="60" height="20" />
+    <rect class="dram" x="340" y="180" width="60" height="20" />
+    <rect class="dram" x="420" y="180" width="60" height="20" />
+    <!-- Row 6 -->
+    <rect class="dram" x="20" y="220" width="60" height="20" />
+    <rect class="dram" x="100" y="220" width="60" height="20" />
+    <rect class="dram dram-glow" x="180" y="220" width="60" height="20" />
+    <rect class="dram dram-glow" x="260" y="220" width="60" height="20" />
+    <rect class="dram" x="340" y="220" width="60" height="20" />
+    <rect class="dram" x="420" y="220" width="60" height="20" />
+    <!-- Row 7 -->
+    <rect class="dram" x="20" y="260" width="60" height="20" />
+    <rect class="dram" x="100" y="260" width="60" height="20" />
+    <rect class="dram" x="180" y="260" width="60" height="20" />
+    <rect class="dram" x="260" y="260" width="60" height="20" />
+    <rect class="dram" x="340" y="260" width="60" height="20" />
+    <rect class="dram" x="420" y="260" width="60" height="20" />
+  </g>
+
+  <!-- Search Sweep Window -->
+  <g class="search-box">
+    <rect x="170" y="60" width="160" height="100" />
+  </g>
+
+  <!-- Target Lock Window -->
+  <g class="target-box">
+    <rect x="310" y="200" width="160" height="100" />
+  </g>
+
+  <!-- Crosshair & Coordinate -->
+  <g class="crosshair">
+    <path d="M 390 230 L 390 270 M 370 250 L 410 250" />
+    <circle cx="390" cy="250" r="4" fill="#58a6ff" />
+  </g>
+  <text x="420" y="255" class="coord-text">x: 240, y: 210</text>
+  <text x="420" y="275" class="coord-text" style="font-size: 12px; fill: #3fb950">conf: 0.998</text>
+
+  <!-- Reference Panel -->
+  <g transform="translate(680, 20)">
+    <rect class="ref-panel" x="0" y="0" width="100" height="100" />
+    <text x="10" y="20" class="ref-title">REF 100x</text>
+    <rect class="dram dram-glow" x="10" y="40" width="35" height="15" />
+    <rect class="dram dram-glow" x="55" y="40" width="35" height="15" />
+    <rect class="dram dram-glow" x="10" y="65" width="35" height="15" />
+    <rect class="dram dram-glow" x="55" y="65" width="35" height="15" />
+  </g>
+
+  <!-- Search Panel Overlay Label -->
+  <text x="150" y="30" class="ref-title">SEARCH 10x (10μm FOV)</text>
+
+  <!-- Status Bar -->
+  <g transform="translate(150, 380)">
+    <rect x="0" y="-15" width="500" height="25" fill="#161b22" stroke="#30363d" stroke-width="1" rx="4"/>
+    <text x="15" y="2" class="status-text" style="animation: statusTextContent 6s infinite ease-in-out;">
+      <tspan class="status-text-1">System Status: </tspan>
+      <tspan fill="currentColor">MONITORING</tspan>
+    </text>
+    <!-- We simulate text change by layering text with opacities -->
+    <text x="135" y="2" class="status-text" style="fill: #ff7b72; animation: statusTextContent 6s infinite; animation-delay: 0s; opacity: 1;">NAV DRIFT DETECTED</text>
+    <text x="135" y="2" class="status-text" style="fill: #d2a8ff; animation: statusTextContent 6s infinite; animation-delay: -1s; opacity: 0;">DENSE CORRELATION SEARCH</text>
+    <text x="135" y="2" class="status-text" style="fill: #3fb950; animation: statusTextContent 6s infinite; animation-delay: -3.5s; opacity: 0;">TARGET LOCKED (± 2.34px)</text>
+    
+    <style>
+      .status-1 { animation: s1 6s infinite; }
+      .status-2 { animation: s2 6s infinite; }
+      .status-3 { animation: s3 6s infinite; }
+      @keyframes s1 { 0%, 15% { opacity: 1; } 16%, 100% { opacity: 0; } }
+      @keyframes s2 { 0%, 15% { opacity: 0; } 16%, 55% { opacity: 1; } 56%, 100% { opacity: 0; } }
+      @keyframes s3 { 0%, 55% { opacity: 0; } 56%, 90% { opacity: 1; } 91%, 100% { opacity: 0; } }
+    </style>
+    
+    <rect x="130" y="-10" width="360" height="15" fill="#161b22" /> <!-- mask -->
+    <text x="135" y="2" class="status-text status-1" style="fill: #ff7b72;">NAV DRIFT DETECTED</text>
+    <text x="135" y="2" class="status-text status-2" style="fill: #d2a8ff;">DENSE CORRELATION SEARCH</text>
+    <text x="135" y="2" class="status-text status-3" style="fill: #3fb950;">TARGET LOCKED (± 2.34px)</text>
+  </g>
+</svg>

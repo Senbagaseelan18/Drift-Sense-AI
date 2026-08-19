@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <style>
+      .bg { fill: #0d1117; }
+      .box { fill: none; stroke-width: 2; }
+      .grid-ref { stroke: rgba(88, 166, 255, 0.2); stroke-width: 1; }
+      .grid-search { stroke: rgba(210, 168, 255, 0.2); stroke-width: 0.5; }
+      .text-label { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; font-weight: bold; fill: #c9d1d9; }
+      .text-sub { font-family: 'Courier New', monospace; font-size: 12px; fill: #8b949e; }
+      
+      .ref-animate {
+        transform-origin: 200px 200px;
+        animation: scaleDown 6s infinite cubic-bezier(0.65, 0, 0.35, 1);
+      }
+      .search-animate {
+        opacity: 0;
+        animation: fadeInSearch 6s infinite cubic-bezier(0.65, 0, 0.35, 1);
+      }
+      .line-connect {
+        stroke: #484f58; stroke-dasharray: 4 4; stroke-width: 1; fill: none;
+        animation: fadeLine 6s infinite;
+      }
+      
+      @keyframes scaleDown {
+        0%, 15% { transform: scale(1) translate(0, 0); opacity: 1; }
+        45%, 65% { transform: scale(0.1) translate(3500px, 0); opacity: 1; }
+        70%, 100% { transform: scale(0.1) translate(3500px, 0); opacity: 0; }
+      }
+      @keyframes fadeInSearch {
+        0%, 20% { opacity: 0; }
+        45%, 100% { opacity: 1; }
+      }
+      @keyframes fadeLine {
+        0%, 15% { opacity: 1; }
+        40%, 100% { opacity: 0; }
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect class="bg" width="800" height="400" />
+
+  <!-- Connecting Lines -->
+  <path class="line-connect" d="M 350 50 L 550 150" />
+  <path class="line-connect" d="M 350 350 L 550 250" />
+
+  <!-- 10x Search Field (Right Side) -->
+  <g class="search-animate" transform="translate(450, 50)">
+    <rect x="0" y="0" width="300" height="300" class="box" stroke="#d2a8ff" fill="rgba(210, 168, 255, 0.05)" />
+    <!-- Dense Grid representing 10x -->
+    <pattern id="grid10x" width="10" height="10" patternUnits="userSpaceOnUse">
+      <path d="M 10 0 L 0 0 0 10" fill="none" class="grid-search" />
+    </pattern>
+    <rect x="0" y="0" width="300" height="300" fill="url(#grid10x)" />
+    
+    <text class="text-label" x="0" y="-10" style="fill: #d2a8ff">SEARCH IMAGE</text>
+    <text class="text-sub" x="120" y="-10">10x (10μm FOV)</text>
+    
+    <!-- Target Highlight inside Search -->
+    <rect x="90" y="140" width="30" height="30" class="box" stroke="#58a6ff" fill="rgba(88, 166, 255, 0.2)" />
+  </g>
+
+  <!-- 100x Reference Field (Left Side) -->
+  <g transform="translate(50, 50)">
+    <text class="text-label" x="0" y="-10" style="fill: #58a6ff">REFERENCE IMAGE</text>
+    <text class="text-sub" x="140" y="-10">100x (1μm FOV)</text>
+    
+    <g class="ref-animate">
+      <rect x="0" y="0" width="300" height="300" class="box" stroke="#58a6ff" fill="#161b22" />
+      <!-- Sparse Grid representing 100x -->
+      <pattern id="grid100x" width="100" height="100" patternUnits="userSpaceOnUse">
+        <path d="M 100 0 L 0 0 0 100" fill="none" class="grid-ref" />
+      </pattern>
+      <rect x="0" y="0" width="300" height="300" fill="url(#grid100x)" />
+      
+      <!-- Central Pattern feature -->
+      <path d="M 100 100 L 200 100 L 200 200 L 100 200 Z" fill="rgba(88, 166, 255, 0.3)" stroke="#58a6ff" stroke-width="4"/>
+      <circle cx="150" cy="150" r="10" fill="#58a6ff" />
+    </g>
+  </g>
+
+  <!-- Explanatory Text -->
+  <g transform="translate(350, 380)">
+    <text class="text-sub" style="text-anchor: middle;">Visualizing the 10x Scale Gap &amp; Drift Search Space</text>
+  </g>
+</svg>

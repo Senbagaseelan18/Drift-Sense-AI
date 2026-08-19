@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500">
+  <defs>
+    <style>
+      .bg { fill: #0d1117; }
+      .box { fill: #161b22; stroke: #30363d; stroke-width: 2; rx: 6; }
+      .text-main { fill: #c9d1d9; font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; font-weight: bold; text-anchor: middle; }
+      .text-sub { fill: #8b949e; font-family: 'Courier New', monospace; font-size: 11px; text-anchor: middle; }
+      .path-line { fill: none; stroke: #484f58; stroke-width: 2; stroke-dasharray: 6 4; }
+      
+      .flow-dot { fill: #58a6ff; opacity: 0; }
+      
+      .highlight-box { stroke: #58a6ff; fill: rgba(88, 166, 255, 0.05); }
+      .highlight-text { fill: #58a6ff; }
+      
+      @keyframes flow1 { 0% { opacity: 0; offset-distance: 0%; } 10% { opacity: 1; offset-distance: 0%; } 30% { opacity: 1; offset-distance: 100%; } 31%, 100% { opacity: 0; } }
+      @keyframes flow2 { 0%, 25% { opacity: 0; offset-distance: 0%; } 30% { opacity: 1; offset-distance: 0%; } 50% { opacity: 1; offset-distance: 100%; } 51%, 100% { opacity: 0; } }
+      @keyframes flow3 { 0%, 45% { opacity: 0; offset-distance: 0%; } 50% { opacity: 1; offset-distance: 0%; } 70% { opacity: 1; offset-distance: 100%; } 71%, 100% { opacity: 0; } }
+      @keyframes flow4 { 0%, 65% { opacity: 0; offset-distance: 0%; } 70% { opacity: 1; offset-distance: 0%; } 90% { opacity: 1; offset-distance: 100%; } 91%, 100% { opacity: 0; } }
+      
+      .f1 { animation: flow1 4s linear infinite; offset-path: path('M 120 100 L 220 100'); }
+      .f1-b { animation: flow1 4s linear infinite; offset-path: path('M 120 400 L 220 400'); }
+      .f2 { animation: flow2 4s linear infinite; offset-path: path('M 380 100 L 450 100 L 450 200 L 520 200'); }
+      .f2-b { animation: flow2 4s linear infinite; offset-path: path('M 380 400 L 450 400 L 450 300 L 520 300'); }
+      .f3 { animation: flow3 4s linear infinite; offset-path: path('M 680 250 L 730 250'); }
+      .f4 { animation: flow4 4s linear infinite; offset-path: path('M 800 250 L 850 250'); }
+      
+      .pulse { animation: blockPulse 4s infinite; }
+      @keyframes blockPulse {
+        0%, 10% { fill: #161b22; stroke: #30363d; }
+        20%, 30% { fill: rgba(88, 166, 255, 0.1); stroke: #58a6ff; }
+        40%, 100% { fill: #161b22; stroke: #30363d; }
+      }
+      .pulse2 { animation: blockPulse2 4s infinite; }
+      @keyframes blockPulse2 {
+        0%, 30% { fill: #161b22; stroke: #30363d; }
+        40%, 50% { fill: rgba(210, 168, 255, 0.1); stroke: #d2a8ff; }
+        60%, 100% { fill: #161b22; stroke: #30363d; }
+      }
+      .pulse3 { animation: blockPulse3 4s infinite; }
+      @keyframes blockPulse3 {
+        0%, 50% { fill: #161b22; stroke: #30363d; }
+        60%, 70% { fill: rgba(63, 185, 80, 0.1); stroke: #3fb950; }
+        80%, 100% { fill: #161b22; stroke: #30363d; }
+      }
+      .pulse4 { animation: blockPulse4 4s infinite; }
+      @keyframes blockPulse4 {
+        0%, 70% { fill: #161b22; stroke: #30363d; }
+        80%, 90% { fill: rgba(255, 123, 114, 0.1); stroke: #ff7b72; }
+        100% { fill: #161b22; stroke: #30363d; }
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect class="bg" width="900" height="500" />
+
+  <!-- Paths -->
+  <path class="path-line" d="M 120 100 L 220 100" />
+  <path class="path-line" d="M 120 400 L 220 400" />
+  <path class="path-line" d="M 380 100 L 450 100 L 450 220 L 520 220" />
+  <path class="path-line" d="M 380 400 L 450 400 L 450 280 L 520 280" />
+  <path class="path-line" d="M 680 250 L 730 250" />
+  <path class="path-line" d="M 800 250 L 850 250" />
+
+  <!-- Input Nodes -->
+  <!-- Reference Image -->
+  <rect class="box" x="20" y="50" width="100" height="100" />
+  <text class="text-main" x="70" y="95">REF</text>
+  <text class="text-sub" x="70" y="115">100x</text>
+  
+  <!-- Search Image -->
+  <rect class="box" x="20" y="350" width="100" height="100" />
+  <text class="text-main" x="70" y="395">SEARCH</text>
+  <text class="text-sub" x="70" y="415">10x</text>
+
+  <!-- Shared Backbone -->
+  <g transform="translate(180, 20)">
+    <rect class="box" x="40" y="20" width="160" height="420" stroke-dasharray="8 4" fill="transparent" />
+    <text class="text-main" x="120" y="40" style="fill: #8b949e">SHARED BACKBONE</text>
+    
+    <rect class="box pulse" x="60" y="60" width="120" height="80" />
+    <text class="text-main" x="120" y="95">ResNet50</text>
+    <text class="text-sub" x="120" y="115">+ FPN</text>
+
+    <rect class="box pulse" x="60" y="320" width="120" height="80" />
+    <text class="text-main" x="120" y="355">ResNet50</text>
+    <text class="text-sub" x="120" y="375">+ FPN</text>
+  </g>
+
+  <!-- Correlation -->
+  <rect class="box pulse2" x="520" y="150" width="160" height="200" />
+  <text class="text-main" x="600" y="235">DENSE</text>
+  <text class="text-main" x="600" y="255">CORRELATION</text>
+  <text class="text-sub" x="600" y="280">Heatmap Gen</text>
+  
+  <rect class="box pulse3" x="730" y="210" width="100" height="80" />
+  <text class="text-main" x="780" y="245">SOFT</text>
+  <text class="text-main" x="780" y="265">ARGMAX</text>
+
+  <!-- Output -->
+  <text class="text-main highlight-text" x="870" y="255">(x, y)</text>
+
+  <!-- Animated flow dots -->
+  <circle class="flow-dot f1" r="5" />
+  <circle class="flow-dot f1-b" r="5" />
+  <circle class="flow-dot f2" r="5" />
+  <circle class="flow-dot f2-b" r="5" />
+  <circle class="flow-dot f3" r="5" />
+  <circle class="flow-dot f4" r="5" />
+
+</svg>
