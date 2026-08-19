@@ -13,8 +13,8 @@
 
     <style>
       .bg { fill: #0B0D17; }
-      .text-large { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 24px; font-weight: 800; fill: #FFFFFF; letter-spacing: 2px; }
-      .text-small { font-family: 'Courier New', monospace; font-size: 14px; fill: #A0ABC0; letter-spacing: 1px; }
+      .text-large { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 28px; font-weight: 800; fill: #FFFFFF; letter-spacing: 2px; }
+      .text-small { font-family: 'Courier New', monospace; font-size: 18px; fill: #A0ABC0; letter-spacing: 1px; }
       .text-cyan { fill: #00F0FF; font-weight: bold; }
       .text-green { fill: #39FF14; font-weight: bold; }
       .text-red { fill: #FF3366; font-weight: bold; }

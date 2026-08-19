@@ -7,8 +7,8 @@
 
     <style>
       .bg { fill: #0B0D17; }
-      .text-large { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 20px; font-weight: 800; fill: #FFFFFF; letter-spacing: 2px; }
-      .text-small { font-family: 'Courier New', monospace; font-size: 14px; fill: #A0ABC0; }
+      .text-large { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 24px; font-weight: 800; fill: #FFFFFF; letter-spacing: 2px; }
+      .text-small { font-family: 'Courier New', monospace; font-size: 18px; fill: #A0ABC0; }
       .text-cyan { fill: #00F0FF; font-weight: bold; }
 
       /* The Microscope Lens View */

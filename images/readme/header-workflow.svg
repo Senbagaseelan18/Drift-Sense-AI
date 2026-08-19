@@ -2,8 +2,8 @@
   <defs>
     <style>
       .bg { fill: #0B0D17; }
-      .text-title { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 24px; font-weight: 800; fill: #FFFFFF; letter-spacing: 2px; }
-      .text-node { font-family: 'Courier New', monospace; font-size: 14px; fill: #A0ABC0; font-weight: bold; text-anchor: middle; }
+      .text-title { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 28px; font-weight: 800; fill: #FFFFFF; letter-spacing: 2px; }
+      .text-node { font-family: 'Courier New', monospace; font-size: 18px; fill: #A0ABC0; font-weight: bold; text-anchor: middle; }
       
       .track { stroke: #1F2937; stroke-width: 2; fill: none; }
       .node { fill: #111827; stroke: #1F2937; stroke-width: 2; rx: 4; transition: all 0.2s; }

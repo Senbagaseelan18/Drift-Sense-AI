@@ -2,8 +2,8 @@
   <defs>
     <style>
       .bg { fill: #0B0D17; }
-      .text-title { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 18px; font-weight: 800; fill: #FFFFFF; letter-spacing: 2px; }
-      .text-small { font-family: 'Courier New', monospace; font-size: 12px; fill: #A0ABC0; font-weight: bold; }
+      .text-title { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 22px; font-weight: 800; fill: #FFFFFF; letter-spacing: 2px; }
+      .text-small { font-family: 'Courier New', monospace; font-size: 16px; fill: #A0ABC0; font-weight: bold; }
       .text-cyan { fill: #00F0FF; }
       
       .box { stroke: #1F2937; stroke-width: 2; fill: #111827; rx: 4; }
@@ -26,7 +26,7 @@
       }
 
       /* Score Labels */
-      .sc { opacity: 0; animation-duration: 12s; animation-iteration-count: infinite; font-family: 'Courier New', monospace; font-size: 14px; font-weight: bold; text-anchor: middle; }
+      .sc { opacity: 0; animation-duration: 12s; animation-iteration-count: infinite; font-family: 'Courier New', monospace; font-size: 18px; font-weight: bold; text-anchor: middle; }
       
       .s-1 { animation-name: show-1; fill: #FF3366; } /* low */
       @keyframes show-1 { 10%, 65% { opacity: 1; } 0%, 9%, 66%, 100% { opacity: 0; } }
@@ -40,7 +40,7 @@
       .s-4 { animation-name: show-4; fill: #FF9900; } /* med */
       @keyframes show-4 { 40%, 65% { opacity: 1; } 0%, 39%, 66%, 100% { opacity: 0; } }
       
-      .s-5 { animation-name: show-5; fill: #39FF14; font-size: 16px; } /* HIGH (Correct) */
+      .s-5 { animation-name: show-5; fill: #39FF14; font-size: 20px; } /* HIGH (Correct) */
       @keyframes show-5 { 50%, 65% { opacity: 1; } 0%, 49%, 66%, 100% { opacity: 0; } }
       
       .s-6 { animation-name: show-6; fill: #FF3366; } /* low */

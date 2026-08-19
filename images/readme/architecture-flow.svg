@@ -2,9 +2,9 @@
   <defs>
     <style>
       .bg { fill: #0B0D17; }
-      .text-large { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 16px; font-weight: 800; fill: #FFFFFF; letter-spacing: 1px; }
-      .text-small { font-family: 'Courier New', monospace; font-size: 12px; fill: #A0ABC0; }
-      .text-math { font-family: 'Courier New', monospace; font-size: 14px; fill: #00F0FF; }
+      .text-large { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 20px; font-weight: 800; fill: #FFFFFF; letter-spacing: 1px; }
+      .text-small { font-family: 'Courier New', monospace; font-size: 16px; fill: #A0ABC0; }
+      .text-math { font-family: 'Courier New', monospace; font-size: 18px; fill: #00F0FF; }
       
       .box { stroke: #1F2937; stroke-width: 2; fill: #111827; rx: 4; }
       

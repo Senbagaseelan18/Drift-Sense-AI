@@ -2,8 +2,8 @@
   <defs>
     <style>
       .bg { fill: #0B0D17; }
-      .text-val { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 32px; font-weight: 900; fill: #FFFFFF; text-anchor: middle; letter-spacing: 1px; }
-      .text-sub { font-family: 'Courier New', monospace; font-size: 14px; fill: #A0ABC0; text-anchor: middle; font-weight: bold; }
+      .text-val { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 36px; font-weight: 900; fill: #FFFFFF; text-anchor: middle; letter-spacing: 1px; }
+      .text-sub { font-family: 'Courier New', monospace; font-size: 18px; fill: #A0ABC0; text-anchor: middle; font-weight: bold; }
       
       .box { stroke: #1F2937; stroke-width: 2; fill: #111827; rx: 8; }
       

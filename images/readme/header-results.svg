@@ -2,8 +2,8 @@
   <defs>
     <style>
       .bg { fill: #0B0D17; }
-      .text-title { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 24px; font-weight: 800; fill: #FFFFFF; letter-spacing: 2px; }
-      .text-val { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 24px; font-weight: bold; fill: #39FF14; opacity: 0; animation: txt 8s infinite; }
+      .text-title { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 28px; font-weight: 800; fill: #FFFFFF; letter-spacing: 2px; }
+      .text-val { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 28px; font-weight: bold; fill: #39FF14; opacity: 0; animation: txt 8s infinite; }
       
       .ring { stroke: #39FF14; stroke-width: 1; fill: none; opacity: 0; animation: r-in 8s infinite; }
       @keyframes r-in { 10%, 80% { opacity: 1; } 0%, 9%, 81%, 100% { opacity: 0; } }

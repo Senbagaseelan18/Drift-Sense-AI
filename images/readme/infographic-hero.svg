@@ -2,7 +2,7 @@
   <defs>
     <style>
       .bg { fill: #0B0D17; }
-      .text-stage { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 20px; font-weight: 800; fill: #FFFFFF; letter-spacing: 2px; text-anchor: middle; }
+      .text-stage { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 24px; font-weight: 800; fill: #FFFFFF; letter-spacing: 2px; text-anchor: middle; }
       
       .box { fill: #111827; stroke: #1F2937; stroke-width: 2; rx: 8; }
       .stage-line { stroke: #1F2937; stroke-width: 4; stroke-dasharray: 10 5; fill: none; }

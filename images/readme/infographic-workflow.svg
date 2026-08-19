@@ -2,8 +2,8 @@
   <defs>
     <style>
       .bg { fill: #0B0D17; }
-      .text-title { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 16px; font-weight: 800; fill: #FFFFFF; letter-spacing: 1px; }
-      .text-small { font-family: 'Courier New', monospace; font-size: 12px; fill: #A0ABC0; }
+      .text-title { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 20px; font-weight: 800; fill: #FFFFFF; letter-spacing: 1px; }
+      .text-small { font-family: 'Courier New', monospace; font-size: 16px; fill: #A0ABC0; }
       .text-green { fill: #39FF14; font-weight: bold; }
       
       .box { stroke: #1F2937; stroke-width: 2; fill: #111827; rx: 4; }
@@ -61,7 +61,7 @@
   <rect class="bg" width="1200" height="400" />
 
   <!-- Header -->
-  <text class="text-title" style="font-size: 24px;" x="50" y="50">END-TO-END DATA FACTORY &amp; PIPELINE</text>
+  <text class="text-title" style="font-size: 28px;" x="50" y="50">END-TO-END DATA FACTORY &amp; PIPELINE</text>
 
   <!-- The Conveyor Belt -->
   <line class="belt" x1="50" y1="200" x2="1150" y2="200" />
@@ -89,7 +89,7 @@
   </defs>
 
   <!-- The Moving Item (Now 2.5x larger and highly detailed) -->
-  <g class="item" transform="translate(0, 110)">
+  <g class="item" transform="translate(0, 180)">
     
     <!-- State 1: Raw structure grid (High-res Wafer Die) -->
     <g class="st1-grid">
@@ -126,7 +126,7 @@
       <!-- AI Chip logic lines -->
       <path d="M-20 40 L-10 40 L0 30 L0 20 M20 40 L10 40 L0 50 L0 60" stroke="#FFF" stroke-width="2" fill="none" opacity="0.6" />
       <circle cx="0" cy="40" r="8" fill="#FFF" />
-      <text class="text-small" style="fill:#FFF; font-weight:bold; font-size:16px;" x="0" y="-10" text-anchor="middle">AI ENGINE</text>
+      <text class="text-small" style="fill:#FFF; font-weight:bold; font-size: 20px;" x="0" y="-10" text-anchor="middle">AI ENGINE</text>
     </g>
 
     <!-- State 5: Locked Target (x,y) -->
