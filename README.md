@@ -1,13 +1,10 @@
 <div align="center">
 
-# 🔬 DRIFT-SENSE AI
-### Deep-Learned Multi-Scale Correlation for Precision Localization in DRAM SEM
-
-> **Recovering wafer navigation errors by learning where a high-magnification reference pattern belongs inside a noisy 10× wider SEM field.**
+<img src="images/readme/header-hero.svg" alt="Drift-Sense Hero Header" width="100%"/>
 
 <br/>
 
-<img src="images/readme/drift-sense-hero.svg" alt="Drift-Sense Hero" width="90%"/>
+<img src="images/readme/infographic-hero.svg" alt="Drift-Sense Hero Infographic" width="100%"/>
 
 <br/>
 
@@ -32,10 +29,6 @@ During semiconductor wafer inspection, high-precision tools must repeatedly navi
 
 **Drift-Sense AI** is a deep learning navigation-error recovery system built for **Applied Materials**. 
 
-<div align="center">
-  <img src="images/readme/scale-localization.svg" alt="Scale Localization" width="85%"/>
-</div>
-
 Given a 100x high-magnification reference crop ($1000 \times 1000\text{ px}$, $1\text{ nm/px}$), our pipeline accurately localizes its target position within a wider 10x search image ($1000 \times 1000\text{ px}$, $10\text{ nm/px}$) under severe SEM degradations, scale shifts ($9:1 \text{ to } 11:1$), small rotations ($\pm 5^\circ$), and repetitive DRAM arrays.
 
 ---
@@ -57,12 +50,14 @@ Drift-Sense is not just another ResNet image-localization project. It directly a
 
 ---
 
-## 🏗 System Architecture & Pipeline
+<div align="center">
+  <img src="images/readme/header-workflow.svg" alt="Workflow Header" width="100%"/>
+</div>
 
 Our approach combines physical DRAM scene synthesis, a multi-scale **Siamese ResNet50 + Feature Pyramid Network (FPN)** encoder, cosine cross-correlation, and a sub-pixel **Soft-Argmax2D** regression layer.
 
 <div align="center">
-  <img src="images/readme/architecture-flow.svg" alt="Animated Architecture Flow" width="90%"/>
+  <img src="images/readme/infographic-workflow.svg" alt="Animated Architecture Flow" width="100%"/>
 </div>
 
 <details>
@@ -109,24 +104,28 @@ flowchart TD
 
 ---
 
-## 🎯 Dense Correlation & Soft-Argmax
+<div align="center">
+  <img src="images/readme/header-decision.svg" alt="Decision Header" width="100%"/>
+</div>
 
 At the core of the network, Drift-Sense explicitly matches the extracted reference feature against every spatial location in the search feature map.
 
 <div align="center">
-  <img src="images/readme/dense-correlation.svg" alt="Dense Correlation" width="90%"/>
+  <img src="images/readme/infographic-decision.svg" alt="Dense Correlation & Decision" width="100%"/>
 </div>
 
 The resulting $28 \times 28$ correlation response is processed into a localization heatmap. Finally, the **Soft-Argmax** layer calculates the expected value of the spatial coordinates, yielding a highly precise $(x, y)$ coordinate lock that is fully differentiable for end-to-end training.
 
 ---
 
-## 📊 Benchmark Results
+<div align="center">
+  <img src="images/readme/header-results.svg" alt="Results Header" width="100%"/>
+</div>
 
 Evaluated on **30 test image pairs** under SEM noise degradations, scale shifts ($9:1 \text{ to } 11:1$), and rotation ($\pm 5^\circ$) variations.
 
 <div align="center">
-  <img src="images/readme/results-dashboard.svg" alt="Results Dashboard" width="90%"/>
+  <img src="images/readme/infographic-dashboard.svg" alt="Results Dashboard" width="100%"/>
 </div>
 
 | Metric | Result |
@@ -206,7 +205,13 @@ To simulate real-world physical constraints, independent SEM degradations are ap
 
 ---
 
-## 💻 Setup & Reproduction
+<div align="center">
+  <img src="images/readme/header-setup.svg" alt="Setup Header" width="100%"/>
+</div>
+
+<div align="center">
+  <img src="images/readme/infographic-setup.svg" alt="Experiment Setup" width="100%"/>
+</div>
 
 ### 1. Clone Repository & Create Environment
 ```bash

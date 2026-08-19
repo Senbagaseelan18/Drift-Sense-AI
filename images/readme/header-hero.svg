@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200">
+  <defs>
+    <!-- Microscopic DRAM traces -->
+    <pattern id="traces" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 0 20 L 40 20 M 20 0 L 20 40" stroke="#1F2937" stroke-width="0.5" />
+      <rect x="10" y="10" width="20" height="5" fill="#1A202C" rx="1" />
+      <rect x="10" y="25" width="20" height="5" fill="#1A202C" rx="1" />
+    </pattern>
+
+    <style>
+      .bg { fill: #0B0D17; }
+      .title { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 72px; font-weight: 900; fill: #FFFFFF; letter-spacing: 10px; }
+      .sub { font-family: 'Courier New', monospace; font-size: 16px; fill: #00F0FF; letter-spacing: 4px; }
+
+      /* Scan line animation */
+      .scan-glow { fill: url(#grad-scan); opacity: 0.2; animation: scan-move 8s infinite linear; }
+      .scan-line { stroke: #00F0FF; stroke-width: 2; animation: scan-move 8s infinite linear; }
+      @keyframes scan-move {
+        0%, 10% { transform: translateX(-300px); }
+        90%, 100% { transform: translateX(1500px); }
+      }
+
+      /* Target Lock at the end */
+      .lock { stroke: #39FF14; stroke-width: 2; fill: none; opacity: 0; animation: lock-in 8s infinite; }
+      @keyframes lock-in {
+        70%, 75% { opacity: 0; transform: scale(2) translate(400px, 40px); }
+        80%, 95% { opacity: 1; transform: scale(1) translate(950px, 80px); }
+        96%, 100% { opacity: 0; transform: scale(1) translate(950px, 80px); }
+      }
+      
+      .lock-dot { fill: #39FF14; opacity: 0; animation: dot-in 8s infinite; }
+      @keyframes dot-in { 80%, 95% { opacity: 1; } 0%, 79%, 96%, 100% { opacity: 0; } }
+    </style>
+
+    <linearGradient id="grad-scan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="transparent" />
+      <stop offset="100%" stop-color="#00F0FF" />
+    </linearGradient>
+  </defs>
+
+  <rect class="bg" width="1200" height="200" />
+  <rect width="1200" height="200" fill="url(#traces)" opacity="0.5" />
+
+  <!-- The wordmark -->
+  <text class="title" x="600" y="110" text-anchor="middle">DRIFT-SENSE</text>
+  <text class="sub" x="600" y="150" text-anchor="middle">AI METROLOGY RECOVERY</text>
+
+  <!-- Scanning effect -->
+  <rect class="scan-glow" x="-200" y="0" width="200" height="200" />
+  <line class="scan-line" x1="0" y1="0" x2="0" y2="200" />
+
+  <!-- Target Lock -->
+  <g class="lock">
+    <line x1="-20" y1="0" x2="-5" y2="0" />
+    <line x1="5" y1="0" x2="20" y2="0" />
+    <line x1="0" y1="-20" x2="0" y2="-5" />
+    <line x1="0" y1="5" x2="0" y2="20" />
+  </g>
+  <circle class="lock-dot" cx="950" cy="80" r="3" />
+
+</svg>

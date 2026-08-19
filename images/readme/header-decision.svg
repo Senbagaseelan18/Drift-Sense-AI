@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200">
+  <defs>
+    <style>
+      .bg { fill: #0B0D17; }
+      .text-title { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 24px; font-weight: 800; fill: #FFFFFF; letter-spacing: 2px; }
+      
+      .cand { stroke: #A0ABC0; stroke-width: 1; fill: none; opacity: 0; animation: c-in 6s infinite; }
+      @keyframes c-in { 10%, 80% { opacity: 0.3; } 0%, 9%, 81%, 100% { opacity: 0; } }
+
+      .winner { opacity: 0; animation: w-in 6s infinite; }
+      @keyframes w-in {
+        30%, 80% { opacity: 1; }
+        0%, 29%, 81%, 100% { opacity: 0; }
+      }
+      
+      .cross { stroke: #39FF14; stroke-width: 2; fill: none; opacity: 0; animation: x-in 6s infinite; }
+      @keyframes x-in {
+        40%, 45% { opacity: 0; transform: scale(2) rotate(45deg); }
+        50%, 80% { opacity: 1; transform: scale(1) rotate(0deg); }
+        0%, 39%, 81%, 100% { opacity: 0; }
+      }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1200" height="200" />
+  
+  <text class="text-title" x="50" y="105">LOCALIZATION DECISION</text>
+
+  <!-- Search field area -->
+  <g transform="translate(600, 100)">
+    <!-- Weak candidates -->
+    <circle class="cand" cx="0" cy="-30" r="8" />
+    <circle class="cand" cx="50" cy="40" r="8" style="animation-delay: 0.1s;" />
+    <circle class="cand" cx="120" cy="-10" r="8" style="animation-delay: 0.2s;" />
+    <circle class="cand" cx="200" cy="30" r="8" style="animation-delay: 0.3s;" />
+    <circle class="cand" cx="280" cy="-40" r="8" style="animation-delay: 0.4s;" />
+    
+    <!-- Winner -->
+    <g transform="translate(350, 0)">
+      <circle class="cand winner" cx="0" cy="0" r="10" stroke="#00F0FF" />
+      <g class="cross">
+        <line x1="-15" y1="0" x2="-5" y2="0" />
+        <line x1="5" y1="0" x2="15" y2="0" />
+        <line x1="0" y1="-15" x2="0" y2="-5" />
+        <line x1="0" y1="5" x2="0" y2="15" />
+      </g>
+    </g>
+  </g>
+
+</svg>

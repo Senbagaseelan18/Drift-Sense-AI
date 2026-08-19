@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400">
+  <defs>
+    <!-- Detailed background grid -->
+    <pattern id="grid-fine" width="20" height="20" patternUnits="userSpaceOnUse">
+      <rect width="20" height="20" fill="#0B0D17" stroke="#1F2937" stroke-width="0.5" />
+    </pattern>
+    <pattern id="grid-coarse" width="60" height="60" patternUnits="userSpaceOnUse">
+      <rect width="60" height="60" fill="#0B0D17" stroke="#1F2937" stroke-width="1" />
+    </pattern>
+
+    <style>
+      .bg { fill: #0B0D17; }
+      .text-title { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 20px; font-weight: 800; fill: #FFFFFF; letter-spacing: 2px; }
+      .text-small { font-family: 'Courier New', monospace; font-size: 14px; fill: #A0ABC0; }
+      .text-cyan { fill: #00F0FF; font-weight: bold; }
+      .text-red { fill: #FF3366; font-weight: bold; }
+
+      .box-ref { fill: none; stroke: #00F0FF; stroke-width: 4; rx: 4; }
+      .box-search { fill: none; stroke: #FF3366; stroke-width: 4; rx: 4; }
+
+      /* Visual Pull-back animation inside the right pane */
+      .pullback { animation: pb 10s infinite cubic-bezier(0.65, 0, 0.35, 1); transform-origin: 225px 150px; }
+      @keyframes pb {
+        0%, 15% { transform: scale(10); } /* Looks like the left side */
+        30%, 85% { transform: scale(1); } /* Zoomed out 10x */
+        95%, 100% { transform: scale(10); }
+      }
+
+      /* Target highlight that appears after zoom out */
+      .target-box { opacity: 0; animation: tb 10s infinite; fill: rgba(0,240,255,0.2); stroke: #00F0FF; stroke-width: 1; }
+      @keyframes tb {
+        35%, 80% { opacity: 1; }
+        0%, 34%, 85%, 100% { opacity: 0; }
+      }
+    </style>
+
+    <!-- The target pattern (used in both) -->
+    <g id="dram-target">
+      <rect x="-15" y="-15" width="30" height="30" fill="#1A202C" stroke="#2D3748" />
+      <circle cx="0" cy="0" r="4" fill="#2D3748" />
+    </g>
+
+    <clipPath id="search-clip">
+      <rect x="0" y="0" width="450" height="300" rx="4" />
+    </clipPath>
+  </defs>
+
+  <rect class="bg" width="1200" height="400" />
+
+  <!-- LEFT PANE: 100x REFERENCE -->
+  <g transform="translate(100, 50)">
+    <rect x="0" y="0" width="450" height="300" fill="url(#grid-fine)" />
+    <rect class="box-ref" width="450" height="300" />
+    <rect x="0" y="0" width="450" height="40" fill="rgba(11,13,23,0.9)" />
+    <text class="text-title text-cyan" x="20" y="27">100× HIGH MAGNIFICATION</text>
+    
+    <!-- Giant target pattern -->
+    <g transform="translate(225, 150) scale(10)">
+      <use href="#dram-target" />
+    </g>
+    
+    <text class="text-small" style="fill:#FFF;" x="225" y="280" text-anchor="middle">Physical Width: 1 μm</text>
+  </g>
+
+  <!-- Connection Arrow -->
+  <path d="M 570 200 L 630 200" stroke="#1F2937" stroke-width="4" stroke-dasharray="8 4" fill="none" />
+  <polygon points="630,200 620,195 620,205" fill="#1F2937" />
+
+  <!-- RIGHT PANE: 10x SEARCH FIELD -->
+  <g transform="translate(650, 50)">
+    <rect x="0" y="0" width="450" height="300" fill="url(#grid-coarse)" />
+    
+    <g clip-path="url(#search-clip)">
+      <g class="pullback">
+        <!-- Many targets to show wide field -->
+        <g transform="translate(225, 150)">
+          <!-- Center -->
+          <use href="#dram-target" />
+          <rect class="target-box" x="-15" y="-15" width="30" height="30" />
+          
+          <!-- Surrounding grid of identical targets -->
+          <!-- Top Row -->
+          <use href="#dram-target" x="-40" y="-40" />
+          <use href="#dram-target" x="0" y="-40" />
+          <use href="#dram-target" x="40" y="-40" />
+          <!-- Mid Row -->
+          <use href="#dram-target" x="-40" y="0" />
+          <use href="#dram-target" x="40" y="0" />
+          <!-- Bot Row -->
+          <use href="#dram-target" x="-40" y="40" />
+          <use href="#dram-target" x="0" y="40" />
+          <use href="#dram-target" x="40" y="40" />
+
+          <!-- Farther out -->
+          <use href="#dram-target" x="-80" y="-40" />
+          <use href="#dram-target" x="-80" y="0" />
+          <use href="#dram-target" x="-80" y="40" />
+          <use href="#dram-target" x="80" y="-40" />
+          <use href="#dram-target" x="80" y="0" />
+          <use href="#dram-target" x="80" y="40" />
+        </g>
+      </g>
+    </g>
+
+    <rect class="box-search" width="450" height="300" />
+    <rect x="0" y="0" width="450" height="40" fill="rgba(11,13,23,0.9)" />
+    <text class="text-title text-red" x="20" y="27">10× WIDE FIELD (SEARCH)</text>
+
+    <!-- Overlay indicating the small size -->
+    <g class="target-box">
+      <line x1="225" y1="130" x2="330" y2="90" stroke="#00F0FF" stroke-width="1" />
+      <text class="text-small text-cyan" x="335" y="85">Target matches</text>
+      <text class="text-small text-cyan" x="335" y="100">100x size</text>
+    </g>
+
+    <text class="text-small" style="fill:#FFF;" x="225" y="280" text-anchor="middle">Physical Width: 10 μm</text>
+  </g>
+
+</svg>

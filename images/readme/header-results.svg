@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200">
+  <defs>
+    <style>
+      .bg { fill: #0B0D17; }
+      .text-title { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 24px; font-weight: 800; fill: #FFFFFF; letter-spacing: 2px; }
+      .text-val { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 24px; font-weight: bold; fill: #39FF14; opacity: 0; animation: txt 8s infinite; }
+      
+      .ring { stroke: #39FF14; stroke-width: 1; fill: none; opacity: 0; animation: r-in 8s infinite; }
+      @keyframes r-in { 10%, 80% { opacity: 1; } 0%, 9%, 81%, 100% { opacity: 0; } }
+
+      /* Scatter animation - points fall in */
+      .pt { fill: #00F0FF; opacity: 0; animation: p-in 8s infinite cubic-bezier(0.4, 0, 0.2, 1); }
+      @keyframes p-in {
+        15%, 80% { opacity: 1; transform: translate(0, 0); }
+        0%, 14%, 81%, 100% { opacity: 0; transform: translate(0, -20px); }
+      }
+      
+      .pt-fail { fill: #FF3366; opacity: 0; animation: pf-in 8s infinite cubic-bezier(0.4, 0, 0.2, 1); }
+      @keyframes pf-in {
+        15%, 80% { opacity: 1; transform: translate(0, 0); }
+        0%, 14%, 81%, 100% { opacity: 0; transform: translate(0, -20px); }
+      }
+      
+      @keyframes txt { 20%, 80% { opacity: 1; } 0%, 19%, 81%, 100% { opacity: 0; } }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1200" height="200" />
+  
+  <text class="text-title" x="50" y="105">BENCHMARK RESULTS</text>
+
+  <!-- Accuracy Ring -->
+  <g transform="translate(600, 100)">
+    <circle class="ring" cx="0" cy="0" r="30" />
+    <circle cx="0" cy="0" r="2" fill="#39FF14" class="ring" />
+    
+    <!-- Points landing inside -->
+    <circle class="pt" cx="10" cy="-10" r="2" style="animation-delay: 0.1s;" />
+    <circle class="pt" cx="-15" cy="5" r="2" style="animation-delay: 0.2s;" />
+    <circle class="pt" cx="5" cy="20" r="2" style="animation-delay: 0.15s;" />
+    <circle class="pt" cx="-20" cy="-15" r="2" style="animation-delay: 0.25s;" />
+    <circle class="pt" cx="15" cy="15" r="2" style="animation-delay: 0.3s;" />
+    <circle class="pt" cx="20" cy="-5" r="2" style="animation-delay: 0.1s;" />
+    <circle class="pt" cx="-10" cy="-20" r="2" style="animation-delay: 0.2s;" />
+    <circle class="pt" cx="-5" cy="15" r="2" style="animation-delay: 0.05s;" />
+    <circle class="pt" cx="5" cy="5" r="2" style="animation-delay: 0.2s;" />
+    <circle class="pt" cx="-25" cy="10" r="2" style="animation-delay: 0.3s;" />
+    <!-- Just some representations, doesn't need all 29 to be individually animated, a cluster is fine -->
+    <circle class="pt" cx="8" cy="-18" r="2" style="animation-delay: 0.12s;" />
+    <circle class="pt" cx="-12" cy="18" r="2" style="animation-delay: 0.22s;" />
+    <circle class="pt" cx="22" cy="10" r="2" style="animation-delay: 0.32s;" />
+    
+    <!-- One landing outside -->
+    <circle class="pt-fail" cx="45" cy="-25" r="2" style="animation-delay: 0.4s;" />
+  </g>
+
+  <!-- Text reveal -->
+  <text class="text-val" x="700" y="108">29 / 30 TARGETS RECOVERED</text>
+
+</svg>

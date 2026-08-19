@@ -1,106 +1,168 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400">
   <defs>
     <style>
-      .bg { fill: #0d1117; }
-      .grid-line { stroke: #21262d; stroke-width: 1; }
-      .text-label { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; font-weight: bold; fill: #c9d1d9; }
-      .text-sub { font-family: 'Courier New', monospace; font-size: 12px; fill: #8b949e; }
+      .bg { fill: #0B0D17; }
+      .text-title { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 18px; font-weight: 800; fill: #FFFFFF; letter-spacing: 2px; }
+      .text-small { font-family: 'Courier New', monospace; font-size: 12px; fill: #A0ABC0; font-weight: bold; }
+      .text-cyan { fill: #00F0FF; }
       
-      .ref-kernel {
-        fill: rgba(88, 166, 255, 0.3);
-        stroke: #58a6ff;
-        stroke-width: 2;
-        animation: scan 4s infinite linear;
-      }
+      .box { stroke: #1F2937; stroke-width: 2; fill: #111827; rx: 4; }
       
-      .heatmap-cell {
-        stroke: #161b22;
-        stroke-width: 1;
-        animation: heatPulse 4s infinite linear;
-      }
-      
-      @keyframes scan {
-        0%, 10% { transform: translate(0, 0); }
-        80%, 100% { transform: translate(140px, 140px); }
-      }
-      
-      @keyframes heatPulse {
-        0%, 10% { fill: #161b22; }
-        80%, 100% { fill: #161b22; }
-      }
-      
-      /* Target Peak Cell */
-      .peak-cell {
-        animation: peakPulse 4s infinite linear;
-      }
-      @keyframes peakPulse {
-        0%, 75% { fill: #161b22; }
-        80%, 90% { fill: #ff7b72; stroke: #ff7b72; }
-        100% { fill: #161b22; }
+      /* Pattern */
+      .pat { fill: #1A202C; stroke: #2D3748; stroke-width: 1; rx: 2; }
+      .pat-dot { fill: #2D3748; }
+
+      /* Scan Window */
+      .scan-window { fill: rgba(0,240,255,0.1); stroke: #00F0FF; stroke-width: 2; animation: s-win 12s infinite; }
+      @keyframes s-win {
+        0%, 5% { transform: translate(320px, 120px); opacity: 0; }
+        10% { transform: translate(320px, 120px); opacity: 1; }
+        20% { transform: translate(520px, 120px); }
+        30% { transform: translate(720px, 120px); }
+        40% { transform: translate(320px, 220px); }
+        50% { transform: translate(520px, 220px); } /* CORRECT MATCH */
+        60% { transform: translate(720px, 220px); }
+        70%, 100% { transform: translate(720px, 220px); opacity: 0; }
       }
 
-      .math-text { font-family: 'Courier New', monospace; font-size: 20px; fill: #58a6ff; font-weight: bold; }
+      /* Score Labels */
+      .sc { opacity: 0; animation-duration: 12s; animation-iteration-count: infinite; font-family: 'Courier New', monospace; font-size: 14px; font-weight: bold; text-anchor: middle; }
+      
+      .s-1 { animation-name: show-1; fill: #FF3366; } /* low */
+      @keyframes show-1 { 10%, 65% { opacity: 1; } 0%, 9%, 66%, 100% { opacity: 0; } }
+      
+      .s-2 { animation-name: show-2; fill: #FF9900; } /* med */
+      @keyframes show-2 { 20%, 65% { opacity: 1; } 0%, 19%, 66%, 100% { opacity: 0; } }
+      
+      .s-3 { animation-name: show-3; fill: #FF3366; } /* low */
+      @keyframes show-3 { 30%, 65% { opacity: 1; } 0%, 29%, 66%, 100% { opacity: 0; } }
+      
+      .s-4 { animation-name: show-4; fill: #FF9900; } /* med */
+      @keyframes show-4 { 40%, 65% { opacity: 1; } 0%, 39%, 66%, 100% { opacity: 0; } }
+      
+      .s-5 { animation-name: show-5; fill: #39FF14; font-size: 16px; } /* HIGH (Correct) */
+      @keyframes show-5 { 50%, 65% { opacity: 1; } 0%, 49%, 66%, 100% { opacity: 0; } }
+      
+      .s-6 { animation-name: show-6; fill: #FF3366; } /* low */
+      @keyframes show-6 { 60%, 65% { opacity: 1; } 0%, 59%, 66%, 100% { opacity: 0; } }
+
+      /* Heatmap Transformation */
+      .heatmap-bg { opacity: 0; fill: url(#hm-grad); animation: hm-show 12s infinite; }
+      @keyframes hm-show { 70%, 90% { opacity: 1; } 0%, 69%, 91%, 100% { opacity: 0; } }
+      
+      /* Final Match Box */
+      .best-match { opacity: 0; fill: rgba(57,255,20,0.2); stroke: #39FF14; stroke-width: 3; animation: bm-show 12s infinite cubic-bezier(0.34, 1.56, 0.64, 1); transform-origin: 560px 260px; }
+      @keyframes bm-show {
+        0%, 75% { opacity: 0; transform: scale(1.5); }
+        80%, 90% { opacity: 1; transform: scale(1); }
+        95%, 100% { opacity: 0; }
+      }
+      
+      .best-text { opacity: 0; animation: bt-show 12s infinite; }
+      @keyframes bt-show { 80%, 90% { opacity: 1; } 0%, 79%, 91%, 100% { opacity: 0; } }
+
     </style>
+    
+    <!-- Heatmap Gradient centered on the correct match (520, 220, w80, h80 -> center 560, 260) -->
+    <radialGradient id="hm-grad" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#39FF14" />
+      <stop offset="20%" stop-color="#FF9900" />
+      <stop offset="50%" stop-color="#FF3366" />
+      <stop offset="100%" stop-color="transparent" />
+    </radialGradient>
   </defs>
 
-  <!-- Background -->
-  <rect class="bg" width="900" height="400" />
+  <rect class="bg" width="1200" height="400" />
 
-  <!-- Title -->
-  <text class="text-label" x="350" y="30" style="text-anchor: middle;">DENSE CROSS-CORRELATION</text>
+  <!-- The Reference (What we are looking for) -->
+  <g transform="translate(80, 150)">
+    <rect class="box" width="100" height="100" stroke="#00F0FF" />
+    <text class="text-title text-cyan" x="50" y="-15" text-anchor="middle">REFERENCE</text>
+    
+    <!-- Unique Target Pattern -->
+    <rect class="pat" x="20" y="20" width="60" height="20" />
+    <rect class="pat" x="20" y="60" width="60" height="20" />
+    <circle class="pat-dot" cx="30" cy="30" r="4" fill="#00F0FF" />
+    <circle class="pat-dot" cx="70" cy="70" r="4" fill="#00F0FF" />
+  </g>
 
-  <!-- Left: Search Feature Map Grid (28x28 visually represented as 8x8 for clarity) -->
-  <g transform="translate(100, 100)">
-    <text class="text-sub" x="0" y="-15">Search Feature Map</text>
-    <rect x="0" y="0" width="160" height="160" fill="#161b22" stroke="#30363d" stroke-width="2"/>
-    <pattern id="grid8x8" width="20" height="20" patternUnits="userSpaceOnUse">
-      <path d="M 20 0 L 0 0 0 20" fill="none" class="grid-line" />
-    </pattern>
-    <rect x="0" y="0" width="160" height="160" fill="url(#grid8x8)" />
+  <!-- Connective arrow -->
+  <g transform="translate(200, 200)">
+    <line x1="0" y1="0" x2="80" y2="0" stroke="#1F2937" stroke-width="2" stroke-dasharray="4" />
+    <polygon points="80,0 70,-5 70,5" fill="#1F2937" />
+  </g>
+
+  <!-- The Search Field -->
+  <g transform="translate(300, 50)">
+    <rect class="box" width="520" height="300" stroke="#1F2937" />
+    <text class="text-title" style="fill:#FFF;" x="260" y="-15" text-anchor="middle">SEARCH FIELD</text>
     
-    <!-- Scanning Reference Kernel -->
-    <rect class="ref-kernel" x="0" y="0" width="20" height="20" />
-    
-    <!-- Reference Feature Note -->
-    <g transform="translate(-80, 0)">
-      <rect x="0" y="0" width="20" height="20" fill="rgba(88, 166, 255, 0.3)" stroke="#58a6ff" stroke-width="2"/>
-      <text class="text-sub" x="-10" y="-10">Ref Feature</text>
-      <path d="M 25 10 L 70 10" stroke="#58a6ff" stroke-width="2" stroke-dasharray="2 2" fill="none" />
+    <!-- Candidate grid: 3x2 grid of patterns spaced out -->
+    <!-- Pattern 1 (Row 1, Col 1) -->
+    <g transform="translate(20, 70)">
+      <rect class="pat" x="10" y="10" width="60" height="20" />
+      <rect class="pat" x="10" y="50" width="60" height="20" />
+      <!-- Slightly wrong dots -->
+      <circle class="pat-dot" cx="20" cy="20" r="4" />
     </g>
-  </g>
-
-  <!-- Math operator -->
-  <text class="math-text" x="320" y="190">★</text>
-
-  <!-- Right: Correlation Heatmap (8x8) -->
-  <g transform="translate(450, 100)">
-    <text class="text-sub" x="0" y="-15">28x28 Localization Heatmap</text>
-    <rect x="0" y="0" width="160" height="160" fill="#161b22" stroke="#30363d" stroke-width="2"/>
-    
-    <!-- Heatmap Cells -->
-    <g id="heatmap-grid">
-      <!-- Generated manually for animation effect: a peak at (140, 140) -->
-      <!-- We will just make the background mostly dark and highlight the peak -->
-      <rect x="0" y="0" width="160" height="160" fill="url(#grid8x8)" />
-      
-      <!-- Fake heatmap glowing radius -->
-      <rect class="peak-cell" x="140" y="140" width="20" height="20" />
-      
-      <!-- Connective lines mapping to soft-argmax -->
-      <path d="M 150 160 L 150 200 L 250 200" stroke="#ff7b72" stroke-width="2" stroke-dasharray="4 4" fill="none" />
+    <!-- Pattern 2 (Row 1, Col 2) -->
+    <g transform="translate(220, 70)">
+      <rect class="pat" x="10" y="10" width="60" height="20" />
+      <rect class="pat" x="10" y="50" width="60" height="20" />
+      <circle class="pat-dot" cx="70" cy="20" r="4" />
     </g>
+    <!-- Pattern 3 (Row 1, Col 3) -->
+    <g transform="translate(420, 70)">
+      <rect class="pat" x="10" y="10" width="60" height="20" />
+      <rect class="pat" x="10" y="50" width="60" height="20" />
+      <circle class="pat-dot" cx="40" cy="40" r="4" />
+    </g>
+    
+    <!-- Pattern 4 (Row 2, Col 1) -->
+    <g transform="translate(20, 170)">
+      <rect class="pat" x="10" y="10" width="60" height="20" />
+      <rect class="pat" x="10" y="50" width="60" height="20" />
+      <circle class="pat-dot" cx="20" cy="60" r="4" />
+    </g>
+    <!-- Pattern 5 (Row 2, Col 2) - THE CORRECT MATCH -->
+    <g transform="translate(220, 170)">
+      <rect class="pat" x="10" y="10" width="60" height="20" />
+      <rect class="pat" x="10" y="50" width="60" height="20" />
+      <circle class="pat-dot" cx="20" cy="20" r="4" />
+      <circle class="pat-dot" cx="60" cy="60" r="4" />
+    </g>
+    <!-- Pattern 6 (Row 2, Col 3) -->
+    <g transform="translate(420, 170)">
+      <rect class="pat" x="10" y="10" width="60" height="20" />
+      <rect class="pat" x="10" y="50" width="60" height="20" />
+      <circle class="pat-dot" cx="40" cy="60" r="4" />
+    </g>
+
+    <!-- Heatmap Overlay (Appears Later) -->
+    <rect class="heatmap-bg" x="20" y="20" width="480" height="260" />
+
   </g>
 
-  <!-- Soft Argmax Node -->
-  <g transform="translate(710, 270)">
-    <rect x="0" y="0" width="120" height="60" fill="#161b22" stroke="#d2a8ff" stroke-width="2" rx="4"/>
-    <text class="text-label" x="60" y="25" style="fill: #d2a8ff; text-anchor: middle;">Soft-Argmax</text>
-    <text class="text-sub" x="60" y="45" style="text-anchor: middle;">(Differentiable)</text>
-    
-    <path d="M 60 -10 L 60 -50 L -60 -50" stroke="#ff7b72" stroke-width="2" stroke-dasharray="4 4" fill="none" />
-    
-    <!-- Output -->
-    <path d="M 120 30 L 150 30" stroke="#d2a8ff" stroke-width="2" fill="none" />
-    <text class="math-text" x="160" y="35" style="fill: #3fb950;">(x, y)</text>
+  <!-- Animated Elements -->
+  
+  <!-- Scan Window -->
+  <rect class="scan-window" width="80" height="80" rx="4" />
+
+  <!-- Scores -->
+  <text class="sc s-1" x="360" y="100">LOW</text>
+  <text class="sc s-2" x="560" y="100">MED</text>
+  <text class="sc s-3" x="760" y="100">LOW</text>
+  <text class="sc s-4" x="360" y="200">MED</text>
+  <text class="sc s-5" x="560" y="200">HIGH</text>
+  <text class="sc s-6" x="760" y="200">LOW</text>
+
+  <!-- Final Best Match Lock -->
+  <rect class="best-match" x="520" y="220" width="80" height="80" rx="4" />
+  
+  <g class="best-text" transform="translate(560, 180)">
+    <rect x="-60" y="-15" width="120" height="20" fill="rgba(11,13,23,0.9)" stroke="#39FF14" stroke-width="1" rx="2" />
+    <text class="text-small" style="fill:#39FF14;" x="0" y="0" text-anchor="middle">BEST MATCH</text>
+    <line x1="0" y1="5" x2="0" y2="40" stroke="#39FF14" stroke-width="1" />
   </g>
+
 </svg>

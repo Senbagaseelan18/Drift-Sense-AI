@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200">
+  <defs>
+    <style>
+      .bg { fill: #0B0D17; }
+      .text-title { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 24px; font-weight: 800; fill: #FFFFFF; letter-spacing: 2px; }
+      .text-node { font-family: 'Courier New', monospace; font-size: 14px; fill: #A0ABC0; font-weight: bold; text-anchor: middle; }
+      
+      .track { stroke: #1F2937; stroke-width: 2; fill: none; }
+      .node { fill: #111827; stroke: #1F2937; stroke-width: 2; rx: 4; transition: all 0.2s; }
+      
+      /* Signal traveling */
+      .signal { fill: #39FF14; animation: travel 6s infinite linear; }
+      @keyframes travel {
+        0% { transform: translateX(550px); opacity: 0; }
+        10%, 90% { opacity: 1; }
+        100% { transform: translateX(1100px); opacity: 0; }
+      }
+
+      /* Node highlights */
+      .n1 { animation: h1 6s infinite; }
+      @keyframes h1 { 10%, 25% { stroke: #00F0FF; fill: rgba(0,240,255,0.1); } 0%, 9%, 26%, 100% { stroke: #1F2937; fill: #111827; } }
+      
+      .n2 { animation: h2 6s infinite; }
+      @keyframes h2 { 35%, 50% { stroke: #00F0FF; fill: rgba(0,240,255,0.1); } 0%, 34%, 51%, 100% { stroke: #1F2937; fill: #111827; } }
+      
+      .n3 { animation: h3 6s infinite; }
+      @keyframes h3 { 60%, 75% { stroke: #00F0FF; fill: rgba(0,240,255,0.1); } 0%, 59%, 76%, 100% { stroke: #1F2937; fill: #111827; } }
+      
+      .n4 { animation: h4 6s infinite; }
+      @keyframes h4 { 85%, 100% { stroke: #39FF14; fill: rgba(57,255,20,0.1); } 0%, 84% { stroke: #1F2937; fill: #111827; } }
+      
+    </style>
+  </defs>
+
+  <rect class="bg" width="1200" height="200" />
+  
+  <text class="text-title" x="50" y="105">ARCHITECTURE PIPELINE</text>
+
+  <!-- Track -->
+  <line class="track" x1="550" y1="100" x2="1100" y2="100" />
+  
+  <circle class="signal" cx="0" cy="100" r="4" />
+
+  <!-- Nodes -->
+  <g transform="translate(600, 85)">
+    <rect class="node n1" x="-40" y="0" width="80" height="30" />
+    <text class="text-node" x="0" y="20">SEM</text>
+  </g>
+  
+  <g transform="translate(750, 85)">
+    <rect class="node n2" x="-40" y="0" width="80" height="30" />
+    <text class="text-node" x="0" y="20">FEATURES</text>
+  </g>
+  
+  <g transform="translate(900, 85)">
+    <rect class="node n3" x="-40" y="0" width="80" height="30" />
+    <text class="text-node" x="0" y="20">MATCH</text>
+  </g>
+  
+  <g transform="translate(1050, 85)">
+    <rect class="node n4" x="-40" y="0" width="80" height="30" />
+    <text class="text-node" style="fill:#39FF14;" x="0" y="20">(x, y)</text>
+  </g>
+
+</svg>

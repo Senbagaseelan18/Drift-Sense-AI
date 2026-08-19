@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400">
+  <defs>
+    <style>
+      .bg { fill: #0B0D17; }
+      .text-title { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 16px; font-weight: 800; fill: #FFFFFF; letter-spacing: 1px; }
+      .text-small { font-family: 'Courier New', monospace; font-size: 12px; fill: #A0ABC0; }
+      .text-green { fill: #39FF14; font-weight: bold; }
+      
+      .box { stroke: #1F2937; stroke-width: 2; fill: #111827; rx: 4; }
+      
+      /* Conveyor Belt */
+      .belt { stroke: #1F2937; stroke-width: 2; stroke-dasharray: 10 5; animation: convey 2s infinite linear; }
+      @keyframes convey { 100% { stroke-dashoffset: -15; } }
+      
+      /* Item moving on the belt */
+      .item { animation: moving 16s infinite linear; }
+      @keyframes moving {
+        0% { transform: translateX(50px); opacity: 0; }
+        5% { opacity: 1; transform: translateX(100px); }
+        95% { opacity: 1; transform: translateX(1100px); }
+        100% { transform: translateX(1150px); opacity: 0; }
+      }
+
+      /* Stage Animations */
+      /* Stage 1: Raw structures */
+      .st1-grid { opacity: 0; animation: s1 16s infinite; }
+      @keyframes s1 { 0%, 20% { opacity: 1; } 21%, 100% { opacity: 0; } }
+      
+      /* Stage 2: Splitting Pair */
+      .st2-pair { opacity: 0; animation: s2 16s infinite; }
+      @keyframes s2 { 21%, 40% { opacity: 1; } 0%, 20%, 41%, 100% { opacity: 0; } }
+      
+      /* Stage 3: Degradation */
+      .st3-deg { opacity: 0; animation: s3 16s infinite; }
+      @keyframes s3 { 41%, 60% { opacity: 1; } 0%, 40%, 61%, 100% { opacity: 0; } }
+      
+      /* Stage 4: Training/Model */
+      .st4-train { opacity: 0; animation: s4 16s infinite; }
+      @keyframes s4 { 61%, 80% { opacity: 1; } 0%, 60%, 81%, 100% { opacity: 0; } }
+      
+      /* Stage 5: Target Lock */
+      .st5-lock { opacity: 0; animation: s5 16s infinite; }
+      @keyframes s5 { 81%, 95% { opacity: 1; } 0%, 80%, 96%, 100% { opacity: 0; } }
+
+      /* Indicator Lights */
+      .light { fill: #1F2937; }
+      .l1 { animation: l1-flash 16s infinite; }
+      @keyframes l1-flash { 5%, 20% { fill: #00F0FF; } 0%, 4%, 21%, 100% { fill: #1F2937; } }
+      .l2 { animation: l2-flash 16s infinite; }
+      @keyframes l2-flash { 25%, 40% { fill: #00F0FF; } 0%, 24%, 41%, 100% { fill: #1F2937; } }
+      .l3 { animation: l3-flash 16s infinite; }
+      @keyframes l3-flash { 45%, 60% { fill: #FF9900; } 0%, 44%, 61%, 100% { fill: #1F2937; } }
+      .l4 { animation: l4-flash 16s infinite; }
+      @keyframes l4-flash { 65%, 80% { fill: #B026FF; } 0%, 64%, 81%, 100% { fill: #1F2937; } }
+      .l5 { animation: l5-flash 16s infinite; }
+      @keyframes l5-flash { 85%, 95% { fill: #39FF14; } 0%, 84%, 96%, 100% { fill: #1F2937; } }
+
+    </style>
+  </defs>
+
+  <rect class="bg" width="1200" height="400" />
+
+  <!-- Header -->
+  <text class="text-title" style="font-size: 24px;" x="50" y="50">END-TO-END DATA FACTORY &amp; PIPELINE</text>
+
+  <!-- The Conveyor Belt -->
+  <line class="belt" x1="50" y1="200" x2="1150" y2="200" />
+  <line class="belt" x1="50" y1="240" x2="1150" y2="240" />
+
+  <!-- The Moving Item -->
+  <g class="item" transform="translate(0, 160)">
+    
+    <!-- State 1: Raw structure grid -->
+    <g class="st1-grid" transform="translate(0, 0)">
+      <rect x="-20" y="0" width="40" height="40" fill="#1A202C" stroke="#2D3748" rx="2" />
+      <rect x="-10" y="10" width="8" height="8" fill="#2D3748" />
+      <rect x="2" y="10" width="8" height="8" fill="#2D3748" />
+      <rect x="-10" y="22" width="8" height="8" fill="#2D3748" />
+      <rect x="2" y="22" width="8" height="8" fill="#2D3748" />
+    </g>
+
+    <!-- State 2: Reference + Search Pair -->
+    <g class="st2-pair" transform="translate(0, 0)">
+      <!-- Search (Large) -->
+      <rect x="-20" y="0" width="40" height="40" fill="#1A202C" stroke="#2D3748" rx="2" />
+      <!-- Reference (Small) -->
+      <rect x="-20" y="-15" width="15" height="15" fill="#1A202C" stroke="#00F0FF" stroke-width="2" rx="1" />
+    </g>
+
+    <!-- State 3: Degraded Pair -->
+    <g class="st3-deg" transform="translate(0, 0)">
+      <rect x="-20" y="0" width="40" height="40" fill="#1A202C" stroke="#FF9900" stroke-width="2" rx="2" stroke-dasharray="1 2" />
+      <rect x="-20" y="-15" width="15" height="15" fill="#1A202C" stroke="#FF9900" stroke-width="2" rx="1" stroke-dasharray="1 2" />
+      <!-- Blur effect -->
+      <circle cx="0" cy="20" r="15" fill="rgba(255,153,0,0.2)" />
+    </g>
+
+    <!-- State 4: Entering Model -->
+    <g class="st4-train" transform="translate(0, 0)">
+      <rect x="-20" y="0" width="40" height="40" fill="#B026FF" opacity="0.3" rx="2" />
+      <text class="text-small" style="fill:#FFF; font-weight:bold;" x="0" y="25" text-anchor="middle">AI</text>
+    </g>
+
+    <!-- State 5: Locked Target (x,y) -->
+    <g class="st5-lock" transform="translate(0, 0)">
+      <rect x="-20" y="0" width="40" height="40" fill="rgba(57,255,20,0.1)" stroke="#39FF14" rx="2" />
+      <circle cx="0" cy="20" r="3" fill="#39FF14" />
+      <line x1="-10" y1="20" x2="10" y2="20" stroke="#39FF14" />
+      <line x1="0" y1="10" x2="0" y2="30" stroke="#39FF14" />
+      <text class="text-small text-green" x="0" y="-5" text-anchor="middle">(x,y)</text>
+    </g>
+
+  </g>
+
+  <!-- The Factory Stations (Static Background) -->
+  <g transform="translate(150, 270)">
+    <!-- 1 -->
+    <circle class="light l1" cx="0" cy="0" r="5" />
+    <text class="text-title" x="0" y="30" text-anchor="middle">76 DRAM STRUCTS</text>
+    <text class="text-small" x="0" y="50" text-anchor="middle">Procedural Gen</text>
+  </g>
+
+  <g transform="translate(350, 270)">
+    <!-- 2 -->
+    <circle class="light l2" cx="0" cy="0" r="5" />
+    <text class="text-title" x="0" y="30" text-anchor="middle">PAIR SPLITTING</text>
+    <text class="text-small" x="0" y="50" text-anchor="middle">Ref 100x + Search 10x</text>
+  </g>
+
+  <g transform="translate(550, 270)">
+    <!-- 3 -->
+    <circle class="light l3" cx="0" cy="0" r="5" />
+    <text class="text-title" x="0" y="30" text-anchor="middle">SEM PHYSICS</text>
+    <text class="text-small" x="0" y="50" text-anchor="middle">Noise, Blur, Streaks</text>
+  </g>
+
+  <g transform="translate(750, 270)">
+    <!-- 4 -->
+    <circle class="light l4" cx="0" cy="0" r="5" />
+    <text class="text-title" x="0" y="30" text-anchor="middle">MODEL TRAINING</text>
+    <text class="text-small" x="0" y="50" text-anchor="middle">Siamese ResNet50</text>
+  </g>
+
+  <g transform="translate(950, 270)">
+    <!-- 5 -->
+    <circle class="light l5" cx="0" cy="0" r="5" />
+    <text class="text-title" x="0" y="30" text-anchor="middle">LOCALIZATION</text>
+    <text class="text-small" x="0" y="50" text-anchor="middle">Precision Lock</text>
+  </g>
+
+</svg>

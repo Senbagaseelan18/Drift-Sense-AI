@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200">
+  <defs>
+    <style>
+      .bg { fill: #0B0D17; }
+      .text-title { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 24px; font-weight: 800; fill: #FFFFFF; letter-spacing: 2px; }
+      .text-sub { font-family: 'Courier New', monospace; font-size: 14px; fill: #A0ABC0; }
+      
+      .box-ref { fill: none; stroke: #00F0FF; stroke-width: 2; rx: 4; }
+      
+      /* Pattern shrinks and moves right */
+      .pat { animation: p-shrink 8s infinite cubic-bezier(0.65, 0, 0.35, 1); transform-origin: 0 0; }
+      @keyframes p-shrink {
+        0%, 15% { transform: scale(1) translate(0px, 0px); opacity: 1; }
+        35%, 85% { transform: scale(0.1) translate(3000px, 0px); opacity: 1; }
+        95%, 100% { transform: scale(0.1) translate(3000px, 0px); opacity: 0; }
+      }
+      
+      /* Target field box */
+      .tgt-field { stroke: #1F2937; stroke-width: 1; fill: none; stroke-dasharray: 4; opacity: 0; animation: tf 8s infinite; }
+      @keyframes tf { 25%, 85% { opacity: 1; } 0%, 24%, 95%, 100% { opacity: 0; } }
+
+    </style>
+  </defs>
+
+  <rect class="bg" width="1200" height="200" />
+  
+  <text class="text-title" x="50" y="60">EXPERIMENT SETUP: 10× SCALE GAP</text>
+  <text class="text-sub" x="50" y="85">Bridging 100x Reference to 10x Search Field</text>
+
+  <!-- Left: Big Reference -->
+  <g transform="translate(600, 50)">
+    <g class="pat">
+      <rect class="box-ref" width="100" height="100" />
+      <rect x="20" y="20" width="60" height="20" fill="#1A202C" stroke="#2D3748" />
+      <rect x="20" y="60" width="60" height="20" fill="#1A202C" stroke="#2D3748" />
+      <circle cx="30" cy="30" r="4" fill="#00F0FF" />
+    </g>
+  </g>
+
+  <!-- Right: Search Field Area -->
+  <g transform="translate(900, 50)">
+    <rect class="tgt-field" x="0" y="0" width="100" height="100" />
+  </g>
+
+</svg>

@@ -1,86 +1,146 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500">
   <defs>
+    <!-- Background Texture -->
+    <pattern id="dot-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="20" cy="20" r="1.5" fill="#1F2937" />
+    </pattern>
+
     <style>
-      .bg { fill: #0d1117; }
-      .box { fill: none; stroke-width: 2; }
-      .grid-ref { stroke: rgba(88, 166, 255, 0.2); stroke-width: 1; }
-      .grid-search { stroke: rgba(210, 168, 255, 0.2); stroke-width: 0.5; }
-      .text-label { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; font-weight: bold; fill: #c9d1d9; }
-      .text-sub { font-family: 'Courier New', monospace; font-size: 12px; fill: #8b949e; }
+      .bg { fill: #0B0D17; }
+      .text-large { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 20px; font-weight: 800; fill: #FFFFFF; letter-spacing: 2px; }
+      .text-small { font-family: 'Courier New', monospace; font-size: 14px; fill: #A0ABC0; }
+      .text-cyan { fill: #00F0FF; font-weight: bold; }
+
+      /* The Microscope Lens View */
+      .lens { clip-path: url(#lens-clip); }
       
-      .ref-animate {
-        transform-origin: 200px 200px;
-        animation: scaleDown 6s infinite cubic-bezier(0.65, 0, 0.35, 1);
+      /* The Zooming Field */
+      .zoom-field { animation: z-out 10s infinite cubic-bezier(0.65, 0, 0.35, 1); transform-origin: 600px 250px; }
+      @keyframes z-out {
+        0%, 15% { transform: scale(10); } /* 100x magnification */
+        35%, 80% { transform: scale(1); } /* 10x magnification (10x smaller visually) */
+        90%, 100% { transform: scale(10); } /* Return to start */
       }
-      .search-animate {
-        opacity: 0;
-        animation: fadeInSearch 6s infinite cubic-bezier(0.65, 0, 0.35, 1);
-      }
-      .line-connect {
-        stroke: #484f58; stroke-dasharray: 4 4; stroke-width: 1; fill: none;
-        animation: fadeLine 6s infinite;
-      }
-      
-      @keyframes scaleDown {
-        0%, 15% { transform: scale(1) translate(0, 0); opacity: 1; }
-        45%, 65% { transform: scale(0.1) translate(3500px, 0); opacity: 1; }
-        70%, 100% { transform: scale(0.1) translate(3500px, 0); opacity: 0; }
-      }
-      @keyframes fadeInSearch {
-        0%, 20% { opacity: 0; }
-        45%, 100% { opacity: 1; }
-      }
-      @keyframes fadeLine {
+
+      /* Ruler Animations */
+      .ruler-1um { opacity: 1; animation: r-1 10s infinite; }
+      @keyframes r-1 {
         0%, 15% { opacity: 1; }
-        40%, 100% { opacity: 0; }
+        25%, 100% { opacity: 0; }
       }
+
+      .ruler-10um { opacity: 0; animation: r-10 10s infinite; }
+      @keyframes r-10 {
+        0%, 25% { opacity: 0; }
+        35%, 85% { opacity: 1; }
+        95%, 100% { opacity: 0; }
+      }
+
+      /* Highlight Box */
+      .highlight-box { opacity: 0; stroke: #00F0FF; stroke-width: 2; fill: rgba(0,240,255,0.1); animation: h-box 10s infinite; }
+      @keyframes h-box {
+        0%, 35% { opacity: 0; }
+        45%, 80% { opacity: 1; }
+        90%, 100% { opacity: 0; }
+      }
+
+      /* Label Animations */
+      .label-ref { opacity: 1; animation: l-ref 10s infinite; }
+      @keyframes l-ref { 0%, 20% { opacity: 1; } 30%, 100% { opacity: 0; } }
+      
+      .label-search { opacity: 0; animation: l-search 10s infinite; }
+      @keyframes l-search { 0%, 30% { opacity: 0; } 40%, 85% { opacity: 1; } 95%, 100% { opacity: 0; } }
     </style>
+
+    <clipPath id="lens-clip">
+      <!-- A large rectangular view area representing the microscope viewport -->
+      <rect x="250" y="50" width="700" height="400" rx="8" />
+    </clipPath>
+
   </defs>
 
-  <!-- Background -->
-  <rect class="bg" width="800" height="400" />
+  <rect class="bg" width="1200" height="500" />
+  
+  <!-- The Viewport Border -->
+  <rect x="248" y="48" width="704" height="404" fill="none" stroke="#1F2937" stroke-width="4" rx="10" />
 
-  <!-- Connecting Lines -->
-  <path class="line-connect" d="M 350 50 L 550 150" />
-  <path class="line-connect" d="M 350 350 L 550 250" />
+  <!-- Inside the Microscope Lens -->
+  <g class="lens">
+    <!-- The physical field that scales -->
+    <g class="zoom-field">
+      <rect x="-3000" y="-3000" width="7200" height="7200" fill="url(#dot-grid)" />
+      
+      <!-- Repeated DRAM Patterns (The search field) -->
+      <!-- Center pattern (The Reference Target) -->
+      <g transform="translate(600, 250)">
+        <rect x="-15" y="-15" width="30" height="30" fill="#1A202C" stroke="#2D3748" stroke-width="1" />
+        <circle cx="0" cy="0" r="4" fill="#2D3748" />
+      </g>
+      
+      <!-- Surrounding patterns to show periodicity -->
+      <!-- Top Row -->
+      <rect x="545" y="195" width="30" height="30" fill="#1A202C" stroke="#2D3748" stroke-width="1" />
+      <rect x="585" y="195" width="30" height="30" fill="#1A202C" stroke="#2D3748" stroke-width="1" />
+      <rect x="625" y="195" width="30" height="30" fill="#1A202C" stroke="#2D3748" stroke-width="1" />
+      <!-- Middle Row Left/Right -->
+      <rect x="545" y="235" width="30" height="30" fill="#1A202C" stroke="#2D3748" stroke-width="1" />
+      <rect x="625" y="235" width="30" height="30" fill="#1A202C" stroke="#2D3748" stroke-width="1" />
+      <!-- Bottom Row -->
+      <rect x="545" y="275" width="30" height="30" fill="#1A202C" stroke="#2D3748" stroke-width="1" />
+      <rect x="585" y="275" width="30" height="30" fill="#1A202C" stroke="#2D3748" stroke-width="1" />
+      <rect x="625" y="275" width="30" height="30" fill="#1A202C" stroke="#2D3748" stroke-width="1" />
+      
+      <!-- More grid patterns spreading out -->
+      <g stroke="#1A202C" fill="none" stroke-width="0.5" opacity="0.5">
+        <path d="M 0 210 L 1200 210 M 0 250 L 1200 250 M 0 290 L 1200 290" />
+        <path d="M 560 0 L 560 500 M 600 0 L 600 500 M 640 0 L 640 500" />
+      </g>
 
-  <!-- 10x Search Field (Right Side) -->
-  <g class="search-animate" transform="translate(450, 50)">
-    <rect x="0" y="0" width="300" height="300" class="box" stroke="#d2a8ff" fill="rgba(210, 168, 255, 0.05)" />
-    <!-- Dense Grid representing 10x -->
-    <pattern id="grid10x" width="10" height="10" patternUnits="userSpaceOnUse">
-      <path d="M 10 0 L 0 0 0 10" fill="none" class="grid-search" />
-    </pattern>
-    <rect x="0" y="0" width="300" height="300" fill="url(#grid10x)" />
-    
-    <text class="text-label" x="0" y="-10" style="fill: #d2a8ff">SEARCH IMAGE</text>
-    <text class="text-sub" x="120" y="-10">10x (10μm FOV)</text>
-    
-    <!-- Target Highlight inside Search -->
-    <rect x="90" y="140" width="30" height="30" class="box" stroke="#58a6ff" fill="rgba(88, 166, 255, 0.2)" />
+    </g>
+
+    <!-- The target box that stays visually constant size but represents the 100x area -->
+    <!-- When zoomed out (10x), it perfectly borders the target pattern -->
+    <rect class="highlight-box" x="585" y="235" width="30" height="30" />
   </g>
 
-  <!-- 100x Reference Field (Left Side) -->
-  <g transform="translate(50, 50)">
-    <text class="text-label" x="0" y="-10" style="fill: #58a6ff">REFERENCE IMAGE</text>
-    <text class="text-sub" x="140" y="-10">100x (1μm FOV)</text>
+  <!-- External Overlays and Rulers (Fixed relative to viewport, not scaling) -->
+  
+  <!-- Left Side: Labels -->
+  <g transform="translate(40, 80)">
+    <g class="label-ref">
+      <text class="text-large text-cyan" x="0" y="0">100× MAGNIFICATION</text>
+      <text class="text-small" style="fill:#FFF;" x="0" y="25">Reference View</text>
+      <text class="text-small" x="0" y="50">1 nm / pixel</text>
+      <text class="text-small" x="0" y="70">Narrow FOV</text>
+    </g>
     
-    <g class="ref-animate">
-      <rect x="0" y="0" width="300" height="300" class="box" stroke="#58a6ff" fill="#161b22" />
-      <!-- Sparse Grid representing 100x -->
-      <pattern id="grid100x" width="100" height="100" patternUnits="userSpaceOnUse">
-        <path d="M 100 0 L 0 0 0 100" fill="none" class="grid-ref" />
-      </pattern>
-      <rect x="0" y="0" width="300" height="300" fill="url(#grid100x)" />
-      
-      <!-- Central Pattern feature -->
-      <path d="M 100 100 L 200 100 L 200 200 L 100 200 Z" fill="rgba(88, 166, 255, 0.3)" stroke="#58a6ff" stroke-width="4"/>
-      <circle cx="150" cy="150" r="10" fill="#58a6ff" />
+    <g class="label-search">
+      <text class="text-large" style="fill:#FF3366;" x="0" y="0">10× WIDE FIELD</text>
+      <text class="text-small" style="fill:#FFF;" x="0" y="25">Search Context</text>
+      <text class="text-small" x="0" y="50">10 nm / pixel</text>
+      <text class="text-small" x="0" y="70">Wide FOV (Many identical candidates)</text>
     </g>
   </g>
 
-  <!-- Explanatory Text -->
-  <g transform="translate(350, 380)">
-    <text class="text-sub" style="text-anchor: middle;">Visualizing the 10x Scale Gap &amp; Drift Search Space</text>
+  <!-- Bottom: Rulers -->
+  <g transform="translate(600, 480)">
+    <!-- 1 um Ruler (Visible at 100x) -->
+    <g class="ruler-1um">
+      <line x1="-150" y1="0" x2="150" y2="0" stroke="#00F0FF" stroke-width="2" />
+      <line x1="-150" y1="-5" x2="-150" y2="5" stroke="#00F0FF" stroke-width="2" />
+      <line x1="150" y1="-5" x2="150" y2="5" stroke="#00F0FF" stroke-width="2" />
+      <text class="text-small text-cyan" x="0" y="-15" text-anchor="middle">1 μm Physical Width</text>
+    </g>
+    
+    <!-- 10 um Ruler (Visible at 10x) -->
+    <g class="ruler-10um">
+      <line x1="-350" y1="0" x2="350" y2="0" stroke="#FF3366" stroke-width="2" />
+      <line x1="-350" y1="-5" x2="-350" y2="5" stroke="#FF3366" stroke-width="2" />
+      <line x1="350" y1="-5" x2="350" y2="5" stroke="#FF3366" stroke-width="2" />
+      <text class="text-small" style="fill:#FF3366;" x="0" y="-15" text-anchor="middle">10 μm Physical Width</text>
+      <line x1="-15" y1="10" x2="15" y2="10" stroke="#00F0FF" stroke-width="2" />
+      <text class="text-small text-cyan" style="font-size: 10px;" x="0" y="25" text-anchor="middle">Reference (1 μm)</text>
+    </g>
   </g>
+
 </svg>

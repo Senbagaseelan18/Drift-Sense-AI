@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300">
+  <defs>
+    <style>
+      .bg { fill: #0B0D17; }
+      .text-val { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 32px; font-weight: 900; fill: #FFFFFF; text-anchor: middle; letter-spacing: 1px; }
+      .text-sub { font-family: 'Courier New', monospace; font-size: 14px; fill: #A0ABC0; text-anchor: middle; font-weight: bold; }
+      
+      .box { stroke: #1F2937; stroke-width: 2; fill: #111827; rx: 8; }
+      
+      /* Subtle hover/active pulses */
+      .g1 { stroke: #39FF14; fill: rgba(57,255,20,0.05); }
+      .g2 { stroke: #FFD700; fill: rgba(255,215,0,0.05); }
+      .g3 { stroke: #B026FF; fill: rgba(176,38,255,0.05); }
+      .g4 { stroke: #00F0FF; fill: rgba(0,240,255,0.05); }
+      
+      /* Icons animations */
+      .i1 { stroke: #39FF14; stroke-width: 2; fill: none; animation: pop 2s infinite alternate; }
+      @keyframes pop { 0% { r: 15px; } 100% { r: 18px; } }
+
+      .i2 { stroke: #FFD700; stroke-width: 2; fill: none; stroke-dasharray: 4; animation: spin 4s infinite linear; transform-origin: 0 0; }
+      @keyframes spin { 100% { transform: rotate(360deg); } }
+
+      .i3 { stroke: #B026FF; stroke-width: 3; stroke-linecap: round; animation: zip 1.5s infinite linear; }
+      @keyframes zip { 0% { stroke-dashoffset: 40; } 100% { stroke-dashoffset: -40; } }
+
+      .i4 { stroke: #00F0FF; fill: rgba(0,240,255,0.2); animation: b-pulse 2s infinite alternate; }
+      @keyframes b-pulse { 0% { stroke-width: 1; } 100% { stroke-width: 3; } }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1200" height="300" />
+
+  <!-- 1. Accuracy -->
+  <g transform="translate(40, 50)">
+    <rect class="box g1" width="260" height="200" />
+    <g transform="translate(130, 60)">
+      <circle class="i1" cx="0" cy="0" />
+      <circle cx="0" cy="0" r="4" fill="#39FF14" />
+      <line x1="-25" y1="0" x2="-5" y2="0" stroke="#39FF14" stroke-width="2" />
+      <line x1="5" y1="0" x2="25" y2="0" stroke="#39FF14" stroke-width="2" />
+      <line x1="0" y1="-25" x2="0" y2="-5" stroke="#39FF14" stroke-width="2" />
+      <line x1="0" y1="5" x2="0" y2="25" stroke="#39FF14" stroke-width="2" />
+    </g>
+    <text class="text-val" style="fill:#39FF14;" x="130" y="130">29 / 30</text>
+    <text class="text-sub" x="130" y="160">TARGETS FOUND</text>
+  </g>
+
+  <!-- 2. Error -->
+  <g transform="translate(330, 50)">
+    <rect class="box g2" width="260" height="200" />
+    <g transform="translate(130, 60)">
+      <circle class="i2" cx="0" cy="0" r="18" />
+      <circle cx="0" cy="0" r="3" fill="#FFF" />
+      <line x1="0" y1="0" x2="18" y2="0" stroke="#FFD700" stroke-width="2" />
+    </g>
+    <text class="text-val" style="fill:#FFD700;" x="130" y="130">2.34 px</text>
+    <text class="text-sub" x="130" y="160">MEAN ERROR</text>
+  </g>
+
+  <!-- 3. Latency -->
+  <g transform="translate(620, 50)">
+    <rect class="box g3" width="260" height="200" />
+    <g transform="translate(130, 60)">
+      <path class="i3" d="M -20 10 L 0 -10 L 10 10 L 25 -5" fill="none" stroke-dasharray="20 40" />
+    </g>
+    <text class="text-val" style="fill:#B026FF;" x="130" y="130">14.2 ms</text>
+    <text class="text-sub" x="130" y="160">GPU INFERENCE</text>
+  </g>
+
+  <!-- 4. Parameters -->
+  <g transform="translate(910, 50)">
+    <rect class="box g4" width="260" height="200" />
+    <g transform="translate(130, 60)">
+      <rect class="i4" x="-20" y="-15" width="40" height="10" />
+      <rect class="i4" x="-15" y="-2" width="30" height="10" style="animation-delay: 0.2s;" />
+      <rect class="i4" x="-10" y="11" width="20" height="10" style="animation-delay: 0.4s;" />
+    </g>
+    <text class="text-val" style="fill:#00F0FF;" x="130" y="130">24.91 M</text>
+    <text class="text-sub" x="130" y="160">PARAMETERS</text>
+  </g>
+
+</svg>
